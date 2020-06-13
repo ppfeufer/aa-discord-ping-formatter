@@ -4,18 +4,24 @@
 {% load static %}
 
 {% block details %}
-<div class="row">
-    {% include "discordpingformatter/form.html" %}
-    {% include 'discordpingformatter/ping.html' %}
+<div class="aa-discord-ping-formatter row">
+    <div class="col-md-6">
+        {% include "discordpingformatter/form.html" %}
+    </div>
+
+    <div class="col-md-6">
+        {% include 'discordpingformatter/ping.html' %}
+    </div>
 </div>
 {% endblock %}
 
 {% block extra_javascript %}
-<!--    <script type="text/javascript" src="{% static 'timezones/js/timeago/jquery.timeago.min.js' %}"></script> -->
+    <script type="text/javascript" src="{% static 'discordpingformatter/js/copy-to-clipboard/copy-to-clipboard.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'discordpingformatter/js/discordpingformatter.js' %}"></script>
 {% endblock %}
 
 {% block extra_css %}
-<!--    <link rel="stylesheet" href="{% static 'timezones/css/weather-icons/css/weather-icons.min.css' %}" type="text/css"> -->
+
 {% endblock %}
 
 {% block extra_script %}
