@@ -1,4 +1,10 @@
 jQuery(document).ready(function($) {
+    /**
+     * convert line breaks into <br>
+     *
+     * @param {string} str
+     * @param {bool} isXhtml
+     */
     var nl2br = (function(str, isXhtml) {
         var breakTag = (isXhtml || typeof isXhtml === 'undefined') ? '<br />' : '<br>';
 
@@ -6,7 +12,7 @@ jQuery(document).ready(function($) {
     });
 
     /**
-     * Closing the message
+     * closing the message
      *
      * @param {string} element
      * @returns {void}
@@ -23,7 +29,7 @@ jQuery(document).ready(function($) {
     });
 
     /**
-     * Show message when copy action was successfull
+     * show message when copy action was successful
      *
      * @param {string} message
      * @param {string} element
@@ -38,7 +44,7 @@ jQuery(document).ready(function($) {
     });
 
     /**
-     * Show message when copy action was not successfull
+     * show message when copy action was not successful
      *
      * @param {string} message
      * @param {string} element
@@ -52,6 +58,7 @@ jQuery(document).ready(function($) {
         return;
     });
 
+    // generate the ping text
     $('button#createPingText').on('click', function() {
         var pingType = $('select#pingType option:selected').val();
         var fleetType = $('select#fleetType option:selected').val();
@@ -69,47 +76,63 @@ jQuery(document).ready(function($) {
         var discordPingText = '';
         discordPingText += pingType + ' :: ';
 
+        discordPingText += '**';
+
         // check if it's a preping or not
         if($('input#prePing').is(':checked')) {
-            discordPingText += '**### PRE PING ###**' + "\n\n";
+            discordPingText += '### PRE PING ###';
+
+            if(fleetType !== '') {
+                discordPingText += ' / ' + fleetType + ' Fleet'
+            }
         } else {
             if(fleetType !== '') {
-                discordPingText += '**' + fleetType + '** ';
+                discordPingText += fleetType + ' ';
             }
 
-            discordPingText += 'Fleet is up' + "\n\n";
+            discordPingText += 'Fleet is up';
         }
 
+        discordPingText += '**' + "\n\n";
+
+        // check if FC name is available
         if(fcName !== '') {
             discordPingText += '**FC:** ' + fcName + "\n";
         }
 
+        // check if fleet name is available
         if(fleetName !== '') {
             discordPingText += '**Fleet Name:** ' + fleetName + "\n";
         }
 
+        // check if formup location is available
         if(formupLocation !== '') {
             discordPingText += '**Formup Location:** ' + formupLocation + "\n";
         }
 
+        // check if formup time is available
         if(formupTime !== '') {
             discordPingText += '**Formup Time:** ' + formupTime + "\n";
         }
 
+        // check if fleet comms is available
         if(fleetComms !== '') {
             discordPingText += '**Comms:** ' + fleetComms + "\n";
         }
 
+        // check if doctrine is available
         if(fleetDoctrine !== '') {
             discordPingText += '**Ships / Doctrine:** ' + fleetDoctrine + "\n";
         }
 
+        // check if srp is available
         if(fleetSrp !== '') {
-            discordPingText += '**SRP:**' + fleetSrp + "\n\n";
+            discordPingText += '**SRP:** ' + fleetSrp + "\n\n";
         }
 
+        // check if additional information is available
         if(additinalInformation !== '') {
-            discordPingText += '**Additinal Information**: ' + "\n" + additinalInformation + "\n";
+            discordPingText += '**Additinal Information**:' + "\n" + additinalInformation + "\n";
         }
 
         $('.aa-discord-ping-formatter-ping-text').html('<p>' + nl2br(discordPingText) + '</p>');
@@ -119,15 +142,15 @@ jQuery(document).ready(function($) {
      * Copy permalink to clipboard
      */
     $('button#copyDiscordPing').on('click', function() {
-            /**
-         * Copy permalink to clipboard
+        /**
+         * copy permalink to clipboard
          *
          * @type Clipboard
          */
         var clipboardDiscordPingData = new Clipboard('button#copyDiscordPing');
 
         /**
-         * Copy success
+         * copy success
          *
          * @param {type} e
          */
@@ -139,7 +162,7 @@ jQuery(document).ready(function($) {
         });
 
         /**
-         * Copy error
+         * copy error
          */
         clipboardDiscordPingData.on('error', function() {
             showError('Error, Ping not copied to clipboard.', '.aa-discord-ping-formatter-ping-copyresult');
