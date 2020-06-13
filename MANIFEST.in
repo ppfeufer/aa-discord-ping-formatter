@@ -3,4 +3,3 @@ include README.md
 recursive-include discord-ping-formatter *.py
 recursive-include discord-ping-formatter/static *
 recursive-include discord-ping-formatter/templates *
-
