@@ -107,8 +107,6 @@ jQuery(document).ready(function($) {
             discordPingText += '**Additinal Information**: ' + "\n" + additinalInformation + "\n";
         }
 
-        console.log(discordPingText);
-
         $('.aa-discord-ping-formatter-ping-text').html('<p>' + nl2br(discordPingText) + '</p>');
     });
 
@@ -116,14 +114,12 @@ jQuery(document).ready(function($) {
      * Copy permalink to clipboard
      */
     $('button#copyDiscordPing').on('click', function() {
-    console.log('copy ping!');
-        /**
+            /**
          * Copy permalink to clipboard
          *
          * @type Clipboard
          */
         var clipboardDiscordPingData = new Clipboard('button#copyDiscordPing');
-        console.log(clipboardDiscordPingData);
 
         /**
          * Copy success
