@@ -1,5 +1,5 @@
 include LICENSE
 include README.md
-recursive-include discord-ping-formatter *.py
-recursive-include discord-ping-formatter/static *
-recursive-include discord-ping-formatter/templates *
+recursive-include discordpingformatter *.py
+recursive-include discordpingformatter/static *
+recursive-include discordpingformatter/templates *
