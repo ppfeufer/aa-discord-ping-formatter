@@ -127,12 +127,12 @@ jQuery(document).ready(function($) {
 
         // check if srp is available
         if(fleetSrp !== '') {
-            discordPingText += '**SRP:** ' + fleetSrp + "\n\n";
+            discordPingText += '**SRP:** ' + fleetSrp + "\n";
         }
 
         // check if additional information is available
         if(additinalInformation !== '') {
-            discordPingText += '**Additinal Information**:' + "\n" + additinalInformation + "\n";
+            discordPingText += "\n" + '**Additinal Information**:' + "\n" + additinalInformation;
         }
 
         $('.aa-discord-ping-formatter-ping-text').html('<p>' + nl2br(discordPingText) + '</p>');
