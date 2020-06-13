@@ -12,7 +12,7 @@ with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
-    name='aa-discordpingformatter',
+    name='aa-discord-ping-formatter',
     version=__version__,
     packages=find_packages(),
     include_package_data=True,
