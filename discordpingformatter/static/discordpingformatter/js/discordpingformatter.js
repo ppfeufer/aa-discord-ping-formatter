@@ -69,11 +69,16 @@ jQuery(document).ready(function($) {
         var discordPingText = '';
         discordPingText += pingType + ' :: ';
 
-        if(fleetType !== '') {
-            discordPingText += '**' + fleetType + '** ';
-        }
+        // check if it's a preping or not
+        if($('input#prePing').is(':checked')) {
+            discordPingText += '**### PRE PING ###**' + "\n\n";
+        } else {
+            if(fleetType !== '') {
+                discordPingText += '**' + fleetType + '** ';
+            }
 
-        discordPingText += 'Fleet is up' + "\n\n";
+            discordPingText += 'Fleet is up' + "\n\n";
+        }
 
         if(fcName !== '') {
             discordPingText += '**FC:** ' + fcName + "\n";
