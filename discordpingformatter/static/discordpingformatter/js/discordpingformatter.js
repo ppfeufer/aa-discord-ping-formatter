@@ -58,18 +58,28 @@ jQuery(document).ready(function($) {
         return;
     });
 
+    /**
+     * sanitize input string
+     *
+     * @param {string} element
+     * @returns {undefined}
+     */
+    var sanitizeInput = (function(input) {
+        return input.replace(/<(|\/|[^>\/bi]|\/[^>bi]|[^\/>][^>]+|\/[^>][^>]+)>/g, '');
+    });
+
     // generate the ping text
     $('button#createPingText').on('click', function() {
-        var pingType = $('select#pingType option:selected').val();
-        var fleetType = $('select#fleetType option:selected').val();
-        var fcName = $('input#fcName').val();
-        var fleetName = $('input#fleetName').val();
-        var formupLocation = $('input#formupLocation').val();
-        var formupTime = $('input#formupTime').val();
-        var fleetComms = $('input#fleetComms').val();
-        var fleetDoctrine = $('input#fleetDoctrine').val();
-        var fleetSrp = $('select#fleetSrp option:selected').val();
-        var additinalInformation = $('textarea#additinalInformation').val();
+        var pingType = sanitizeInput($('select#pingType option:selected').val());
+        var fleetType = sanitizeInput($('select#fleetType option:selected').val());
+        var fcName = sanitizeInput($('input#fcName').val());
+        var fleetName = sanitizeInput($('input#fleetName').val());
+        var formupLocation = sanitizeInput($('input#formupLocation').val());
+        var formupTime = sanitizeInput($('input#formupTime').val());
+        var fleetComms = sanitizeInput($('input#fleetComms').val());
+        var fleetDoctrine = sanitizeInput($('input#fleetDoctrine').val());
+        var fleetSrp = sanitizeInput($('select#fleetSrp option:selected').val());
+        var additinalInformation = sanitizeInput($('textarea#additinalInformation').val());
 
         $('.aa-discord-ping-formatter-ping').show();
 
@@ -93,46 +103,46 @@ jQuery(document).ready(function($) {
             discordPingText += 'Fleet is up';
         }
 
-        discordPingText += '**' + "\n\n";
+        discordPingText += '**' + "\n";
 
         // check if FC name is available
         if(fcName !== '') {
-            discordPingText += '**FC:** ' + fcName + "\n";
+            discordPingText += "\n" + '**FC:** ' + fcName;
         }
 
         // check if fleet name is available
         if(fleetName !== '') {
-            discordPingText += '**Fleet Name:** ' + fleetName + "\n";
+            discordPingText += "\n" + '**Fleet Name:** ' + fleetName;
         }
 
         // check if formup location is available
         if(formupLocation !== '') {
-            discordPingText += '**Formup Location:** ' + formupLocation + "\n";
+            discordPingText += "\n" + '**Formup Location:** ' + formupLocation;
         }
 
         // check if formup time is available
         if(formupTime !== '') {
-            discordPingText += '**Formup Time:** ' + formupTime + "\n";
+            discordPingText += "\n" + '**Formup Time:** ' + formupTime ;
         }
 
         // check if fleet comms is available
         if(fleetComms !== '') {
-            discordPingText += '**Comms:** ' + fleetComms + "\n";
+            discordPingText += "\n" + '**Comms:** ' + fleetComms;
         }
 
         // check if doctrine is available
         if(fleetDoctrine !== '') {
-            discordPingText += '**Ships / Doctrine:** ' + fleetDoctrine + "\n";
+            discordPingText += "\n" + '**Ships / Doctrine:** ' + fleetDoctrine;
         }
 
         // check if srp is available
         if(fleetSrp !== '') {
-            discordPingText += '**SRP:** ' + fleetSrp + "\n";
+            discordPingText += "\n" + '**SRP:** ' + fleetSrp;
         }
 
         // check if additional information is available
         if(additinalInformation !== '') {
-            discordPingText += "\n" + '**Additinal Information**:' + "\n" + additinalInformation;
+            discordPingText += "\n\n" + '**Additinal Information**:' + "\n" + additinalInformation;
         }
 
         $('.aa-discord-ping-formatter-ping-text').html('<p>' + nl2br(discordPingText) + '</p>');
