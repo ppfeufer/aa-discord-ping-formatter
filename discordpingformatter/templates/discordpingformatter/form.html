@@ -5,6 +5,15 @@
             <select id="pingType" name="pingType" class="form-control">
                 <option value="@here">@here</option>
                 <option value="@everyone">@everyone</option>
+
+                {% if additionalPingTargets|length > 0 %}
+                    <option value="" disabled></option>
+                    <optgroup label="Additionally configured ping targets">
+                        {% for pingTarget in additionalPingTargets %}
+                            <option value="{{ pingTarget }}">{{ pingTarget }}</option>
+                        {% endfor %}
+                    </optgroup>
+                {% endif %}
             </select>
         </div>
     </div>
@@ -29,6 +38,15 @@
                 <option value="Home Defense">Home Defense</option>
                 <option value="StratOP">StratOP</option>
                 <option value="CTA">CTA</option>
+
+                {% if additionalFleetTypes|length > 0 %}
+                    <option value="" disabled></option>
+                    <optgroup label="Additionally configured fleet types">
+                        {% for fleetType in additionalFleetTypes %}
+                            <option value="{{ fleetType }}">{{ fleetType }}</option>
+                        {% endfor %}
+                    </optgroup>
+                {% endif %}
             </select>
         </div>
     </div>

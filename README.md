@@ -7,6 +7,7 @@ App for formatting pings for Discord in Alliance Auth
 - [Installation](#installation)
 - [Updating](#updating)
 - [Screenshots](#screenshots)
+- [Configuration](#configuration)
 - [Change Log](CHANGELOG.md)
 
 ## Installation
@@ -72,3 +73,31 @@ Finally restart your AA supervisor services.
 ### Discord Ping
 
 ![Discord Ping](https://raw.githubusercontent.com/ppfeufer/aa-discord-ping-formatter/development/discordpingformatter/docs/discord-ping.jpg)
+
+## Configuration
+
+### Adding Ping Targets
+
+Per default you have 2 ping targets you can select from. That's `@everyone` and `@here`. If you need more than these 2, you can add them to your `local.py` and override the default behaviour that way.
+
+Open your `local.py` in an editor of your choice and add the following at the end.
+
+```python
+## AA Discord Ping Formatter
+AA_DISCORDFORMATTER_ADDITIONAL_PING_TARGETS = [
+    '@Member',
+]
+```
+
+### Adding Fleet Types
+Per default you have 4 fleet types you can select from. That's `Roam`, `Home Defense`, `StratOP` and `CTA`. If you need more than these 4, you can add them to your `local.py` and override the default behaviour that way.
+
+Open your `local.py` in an editor of your choice and add the following at the end.
+
+```python
+## AA Discord Ping Formatter
+AA_DISCORDFORMATTER_ADDITIONAL_FLEET_TYPES = [
+    'Mining',
+    'Ratting',
+]
+```
