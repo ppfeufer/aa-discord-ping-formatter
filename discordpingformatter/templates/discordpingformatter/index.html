@@ -6,7 +6,7 @@
 {% block details %}
 <div class="aa-discord-ping-formatter row">
     <div class="col-md-6">
-        {% include "discordpingformatter/form.html" %}
+        {% include "discordpingformatter/form.html" with additionalPingTargets=additionalPingTargets additionalFleetTypes=additionalFleetTypes %}
     </div>
 
     <div class="col-md-6">
