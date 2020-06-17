@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.1.4] -  xxxx.xx.xx
+### Changed
+- Ping Type renamed to Ping Target in form
+
+### Fixed
+- typo in Additional Information
+
 ## [0.1.3] - 2020-06-15
 ### Added
 - Configuration for additional ping targets and fleet types
