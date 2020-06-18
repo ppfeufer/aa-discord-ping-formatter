@@ -2,13 +2,13 @@ jQuery(document).ready(function($) {
     /**
      * convert line breaks into <br>
      *
-     * @param {string} str
+     * @param {string} string
      * @param {bool} isXhtml
      */
-    var nl2br = (function(str, isXhtml) {
+    var nl2br = (function(string, isXhtml) {
         var breakTag = (isXhtml || typeof isXhtml === 'undefined') ? '<br />' : '<br>';
 
-        return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1'+ breakTag +'$2');
+        return (string + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
     });
 
     /**
@@ -70,7 +70,7 @@ jQuery(document).ready(function($) {
 
     // generate the ping text
     $('button#createPingText').on('click', function() {
-        var pingType = sanitizeInput($('select#pingType option:selected').val());
+        var pingTarget = sanitizeInput($('select#pingTarget option:selected').val());
         var fleetType = sanitizeInput($('select#fleetType option:selected').val());
         var fcName = sanitizeInput($('input#fcName').val());
         var fleetName = sanitizeInput($('input#fleetName').val());
@@ -79,12 +79,12 @@ jQuery(document).ready(function($) {
         var fleetComms = sanitizeInput($('input#fleetComms').val());
         var fleetDoctrine = sanitizeInput($('input#fleetDoctrine').val());
         var fleetSrp = sanitizeInput($('select#fleetSrp option:selected').val());
-        var additinalInformation = sanitizeInput($('textarea#additinalInformation').val());
+        var additionalInformation = sanitizeInput($('textarea#additionalInformation').val());
 
         $('.aa-discord-ping-formatter-ping').show();
 
         var discordPingText = '';
-        discordPingText += pingType + ' :: ';
+        discordPingText += pingTarget + ' :: ';
 
         discordPingText += '**';
 
@@ -141,8 +141,8 @@ jQuery(document).ready(function($) {
         }
 
         // check if additional information is available
-        if(additinalInformation !== '') {
-            discordPingText += "\n\n" + '**Additinal Information**:' + "\n" + additinalInformation;
+        if(additionalInformation !== '') {
+            discordPingText += "\n\n" + '**Additional Information**:' + "\n" + additionalInformation;
         }
 
         $('.aa-discord-ping-formatter-ping-text').html('<p>' + nl2br(discordPingText) + '</p>');
