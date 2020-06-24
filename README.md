@@ -101,3 +101,21 @@ AA_DISCORDFORMATTER_ADDITIONAL_FLEET_TYPES = [
     'Ratting',
 ]
 ```
+
+### Adding Ping Channels
+Per default, your ping will just be formatted for you to copy and paste. But, if your FCs are too lazy even for that, you can configure webhooks. One for each channel you might want to ping.
+
+Open your `local.py` in an editor of your choice and add the following at the end.
+
+```python
+AA_DISCORDFORMATTER_ADDITIONAL_PING_WEBHOOKS = [
+    {
+        'discordChannelName': 'Fleet Pings (#fleet-pings)',
+        'discordWebhookUrl': 'https://discordapp.com/api/webhooks/xxxxxxxxxxxxxxxxxx/yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
+    },
+    {
+        'discordChannelName': 'Pre Pings (#pre-pings)',
+        'discordWebhookUrl': 'https://discordapp.com/api/webhooks/xxxxxxxxxxxxxxxxxx/yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
+    }
+]
+```

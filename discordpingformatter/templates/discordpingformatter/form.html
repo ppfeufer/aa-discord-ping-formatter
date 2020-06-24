@@ -29,6 +29,20 @@
         </div>
     </div>
 
+    {% if additionalPingWebhooks|length > 0 %}
+        <div class="form-group clearfix">
+            <label class="col-md-3 control-label" for="pingTarget">Ping Channel<br><small>Select a channel to ping it automatically</small></label>
+            <div class="col-md-9">
+                <select id="pingChannel" name="pingChannel" class="form-control">
+                    <option value="">None, just format it for me</option>
+                    {% for pingWebhook in additionalPingWebhooks %}
+                        <option value="{{ pingWebhook.discordWebhookUrl }}">{{ pingWebhook.discordChannelName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    {% endif %}
+
     <div class="form-group clearfix">
         <label class="col-md-3 control-label" for="fleetType">Fleet Type</label>
         <div class="col-md-9">
