@@ -19,9 +19,9 @@ jQuery(document).ready(function($) {
      */
     var closeCopyMessageElement = (function(element) {
         /**
-         * close after 5 seconds
+         * close after 10 seconds
          */
-        $(element).fadeTo(5000, 500).slideUp(500, function() {
+        $(element).fadeTo(10000, 500).slideUp(500, function() {
             $(this).slideUp(500, function() {
                 $(this).remove();
             });
@@ -68,6 +68,27 @@ jQuery(document).ready(function($) {
         return input.replace(/<(|\/|[^>\/bi]|\/[^>bi]|[^\/>][^>]+|\/[^>][^>]+)>/g, '');
     });
 
+    /**
+     * send a message to a Discord webhook
+     *
+     * @param {string} discordWebhook
+     * @param {string} discordPingText
+     */
+    var sendDiscordPing = (function(discordWebhook, discordPingText) {
+        var request = new XMLHttpRequest();
+
+        request.open("POST", discordWebhook);
+        request.setRequestHeader('Content-type', 'application/json');
+
+        var params = {
+            username: "",
+            avatar_url: "",
+            content: discordPingText
+        };
+
+        request.send(JSON.stringify(params));
+    });
+
     // generate the ping text
     $('button#createPingText').on('click', function() {
         var pingTarget = sanitizeInput($('select#pingTarget option:selected').val());
@@ -80,6 +101,13 @@ jQuery(document).ready(function($) {
         var fleetDoctrine = sanitizeInput($('input#fleetDoctrine').val());
         var fleetSrp = sanitizeInput($('select#fleetSrp option:selected').val());
         var additionalInformation = sanitizeInput($('textarea#additionalInformation').val());
+
+        // ping webhooks, if configured
+        var discordWebhook = false;
+
+        if($('select#pingChannel').length) {
+            discordWebhook = sanitizeInput($('select#pingChannel option:selected').val());
+        }
 
         $('.aa-discord-ping-formatter-ping').show();
 
@@ -146,6 +174,14 @@ jQuery(document).ready(function($) {
         }
 
         $('.aa-discord-ping-formatter-ping-text').html('<p>' + nl2br(discordPingText) + '</p>');
+
+        // ping it directly if a webhook is selected
+        if(discordWebhook !== false && discordWebhook !== '') {
+            sendDiscordPing(discordWebhook, discordPingText);
+
+            // tell the FC that it's already pinged
+            showSuccess('Success, your ping has been sent to your Discord.', '.aa-discord-ping-formatter-ping-copyresult');
+        }
     });
 
     /**
