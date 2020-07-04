@@ -85,9 +85,20 @@ Open your `local.py` in an editor of your choice and add the following at the en
 ```python
 ## AA Discord Ping Formatter
 AA_DISCORDFORMATTER_ADDITIONAL_PING_TARGETS = [
-    '@Member',
+    {
+        'roleId': 'xxxxxxxxxxxxxxxxxx',
+        'roleName': 'Member'
+    },
+    {
+        'roleId': 'xxxxxxxxxxxxxxxxxx',
+        'roleName': 'Capital Pilots'
+    },
 ]
 ```
+
+To get the `roleId` go to your Discord Server Settings » Roles and right click the role you need and copy the ID. You might need to activate the Developer Mode for your Discord account in order to do so. You activate the Developmer Mode in your account settings under Appearance » Advanced » Developer Mode.
+
+**Important:** Both, `roleId` and `roleName` need to be without the `@`, it will be added automatically. `roleName` needs to be spelled exactly as it is on Discord.
 
 ### Adding Fleet Types
 Per default you have 4 fleet types you can select from. That's `Roam`, `Home Defense`, `StratOP` and `CTA`. If you need more than these 4, you can add them to your `local.py` and override the default behaviour that way.
@@ -108,6 +119,7 @@ Per default, your ping will just be formatted for you to copy and paste. But, if
 Open your `local.py` in an editor of your choice and add the following at the end.
 
 ```python
+## AA Discord Ping Formatter
 AA_DISCORDFORMATTER_ADDITIONAL_PING_WEBHOOKS = [
     {
         'discordChannelName': 'Fleet Pings (#fleet-pings)',

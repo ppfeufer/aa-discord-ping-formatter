@@ -92,6 +92,7 @@ jQuery(document).ready(function($) {
     // generate the ping text
     $('button#createPingText').on('click', function() {
         var pingTarget = sanitizeInput($('select#pingTarget option:selected').val());
+        var pingTargetText = sanitizeInput($('select#pingTarget option:selected').text());
         var fleetType = sanitizeInput($('select#fleetType option:selected').val());
         var fcName = sanitizeInput($('input#fcName').val());
         var fleetName = sanitizeInput($('input#fleetName').val());
@@ -112,8 +113,22 @@ jQuery(document).ready(function($) {
         $('.aa-discord-ping-formatter-ping').show();
 
         var discordPingText = '';
-        discordPingText += pingTarget + ' :: ';
 
+        // determine pingTargetText
+        if(pingTargetText.indexOf('@') > -1) {
+            discordPingTarget = pingTargetText;
+        } else {
+            discordPingTarget = '@' + pingTargetText;
+        }
+
+        // determine pingTarget
+        if(pingTarget.indexOf('@') > -1) {
+            webhookPingTarget = pingTarget;
+        } else {
+            webhookPingTarget = '<@&' + pingTarget + '>';
+        }
+
+        discordPingText += ' :: ';
         discordPingText += '**';
 
         // check if it's a preping or not
@@ -173,11 +188,11 @@ jQuery(document).ready(function($) {
             discordPingText += "\n\n" + '**Additional Information**:' + "\n" + additionalInformation;
         }
 
-        $('.aa-discord-ping-formatter-ping-text').html('<p>' + nl2br(discordPingText) + '</p>');
+        $('.aa-discord-ping-formatter-ping-text').html('<p>' + nl2br(discordPingTarget + discordPingText) + '</p>');
 
         // ping it directly if a webhook is selected
         if(discordWebhook !== false && discordWebhook !== '') {
-            sendDiscordPing(discordWebhook, discordPingText);
+            sendDiscordPing(discordWebhook, webhookPingTarget + discordPingText);
 
             // tell the FC that it's already pinged
             showSuccess('Success, your ping has been sent to your Discord.', '.aa-discord-ping-formatter-ping-copyresult');
