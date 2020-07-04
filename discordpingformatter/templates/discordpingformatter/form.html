@@ -10,7 +10,7 @@
                     <option value="" disabled></option>
                     <optgroup label="Additionally configured ping targets">
                         {% for pingTarget in additionalPingTargets %}
-                            <option value="{{ pingTarget }}">{{ pingTarget }}</option>
+                            <option value="{{ pingTarget.roleId }}">@{{ pingTarget.roleName }}</option>
                         {% endfor %}
                     </optgroup>
                 {% endif %}
