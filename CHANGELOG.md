@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.1.7] - 2020-07-08
+### Added
+- Link to timezones conversion on formup time if the [aa-timezones](https://github.com/ppfeufer/aa-timezones) module is installed
+
 ## [0.1.6] - 2020-07-04
 ### Fixed
 - Ping for non default roles via Webhook (#9)

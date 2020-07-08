@@ -31,7 +31,7 @@
 
     {% if additionalPingWebhooks|length > 0 %}
         <div class="form-group clearfix">
-            <label class="col-md-3 control-label" for="pingTarget">Ping Channel<br><small>Select a channel to ping it automatically</small></label>
+            <label class="col-md-3 control-label" for="pingTarget">Ping Channel<br><span class="small">Select a channel to ping it automatically</span></label>
             <div class="col-md-9">
                 <select id="pingChannel" name="pingChannel" class="form-control">
                     <option value="">None, just format it for me</option>
@@ -68,42 +68,51 @@
     <div class="form-group clearfix">
         <label class="col-md-3 control-label" for="fcName">FC Name</label>
         <div class="col-md-9">
-            <input id="fcName" name="fcName" type="text" class="form-control input-md" required="">
+            <input id="fcName" name="fcName" type="text" class="form-control input-md">
         </div>
     </div>
 
     <div class="form-group clearfix">
         <label class="col-md-3 control-label" for="fleetName">Fleet Name</label>
         <div class="col-md-9">
-            <input id="fleetName" name="fleetName" type="text" class="form-control input-md" required="">
+            <input id="fleetName" name="fleetName" type="text" class="form-control input-md">
         </div>
     </div>
 
     <div class="form-group clearfix">
         <label class="col-md-3 control-label" for="formupLocation">Formup Location</label>
         <div class="col-md-9">
-            <input id="formupLocation" name="formupLocation" type="text" class="form-control input-md" required="">
+            <input id="formupLocation" name="formupLocation" type="text" class="form-control input-md">
         </div>
     </div>
 
     <div class="form-group clearfix">
-        <label class="col-md-3 control-label" for="formupTime">Formup Time</label>
+        <label class="col-md-3 control-label" for="formupTime">Formup Time<br><span class="small">Always use Eve Time</span></label>
         <div class="col-md-9">
-            <input id="formupTime" name="formupTime" type="text" class="form-control input-md" required="">
+            <input id="formupTime" name="formupTime" type="text" class="form-control input-md" disabled>
+            <span class="small">To enable this field, either make it a Pre-Ping (checkbox above) or uncheck "Formup NOW" (checkbox below).</span>
+            {% if timezones_installed %}
+                <span class="small">Timezones module is installed. Link to time zone conversion will be added automatically if you set a date and time here.</span>
+            {% endif %}
+            <div class="checkbox">
+                <label for="formupTimeNow">
+                    <input type="checkbox" name="formupTimeNow" id="formupTimeNow" value="1" checked> Formup NOW<br><span class="small">If this checkbox is active, formup time will be set to "NOW" and the time in the field above (if any is set) will be ignored.</span>
+                </label>
+            </div>
         </div>
     </div>
 
     <div class="form-group clearfix">
         <label class="col-md-3 control-label" for="fleetComms">Fleet Comms</label>
         <div class="col-md-9">
-            <input id="fleetComms" name="fleetComms" type="text" class="form-control input-md" required="">
+            <input id="fleetComms" name="fleetComms" type="text" class="form-control input-md">
         </div>
     </div>
 
     <div class="form-group clearfix">
         <label class="col-md-3 control-label" for="fleetDoctrine">Ships / Doctrine</label>
         <div class="col-md-9">
-            <input id="fleetDoctrine" name="fleetDoctrine" type="text" class="form-control input-md" required="">
+            <input id="fleetDoctrine" name="fleetDoctrine" type="text" class="form-control input-md">
         </div>
     </div>
 
@@ -132,3 +141,8 @@
         </div>
     </div>
 </fieldset>
+
+<script type="text/javascript">
+    var timezonesInstalled = {{ timezones_installed|yesno:"true,false" }};
+    var siteUrl = '{{ site_url }}/';
+</script>

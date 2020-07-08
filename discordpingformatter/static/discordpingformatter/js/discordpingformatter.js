@@ -1,4 +1,9 @@
+/* global timezonesInstalled, siteUrl */
+
 jQuery(document).ready(function($) {
+    /* Functions
+    ----------------------------------------------------------------------------------------------------------------- */
+
     /**
      * convert line breaks into <br>
      *
@@ -90,7 +95,7 @@ jQuery(document).ready(function($) {
     });
 
     // generate the ping text
-    $('button#createPingText').on('click', function() {
+    var generateDiscordPing = (function() {
         var pingTarget = sanitizeInput($('select#pingTarget option:selected').val());
         var pingTargetText = sanitizeInput($('select#pingTarget option:selected').text());
         var fleetType = sanitizeInput($('select#fleetType option:selected').val());
@@ -164,8 +169,20 @@ jQuery(document).ready(function($) {
         }
 
         // check if formup time is available
-        if(formupTime !== '') {
-            discordPingText += "\n" + '**Formup Time:** ' + formupTime ;
+        if($('input#formupTimeNow').is(':checked')) {
+            discordPingText += "\n" + '**Formup Time:** NOW';
+        } else {
+            if(formupTime !== '') {
+                discordPingText += "\n" + '**Formup Time:** ' + formupTime;
+
+                // get the timestamp and build the link to the timezones module if it's installed
+                if(timezonesInstalled === true) {
+                    var formupTimestamp = ((new Date(formupTime + ' UTC')).getTime()) / 1000;
+                    var timezonesUrl = siteUrl + 'timezones/?#' + formupTimestamp;
+
+                    discordPingText += ' - ' + timezonesUrl;
+                }
+            }
         }
 
         // check if fleet comms is available
@@ -200,11 +217,11 @@ jQuery(document).ready(function($) {
     });
 
     /**
-     * Copy permalink to clipboard
+     * copy the discord ping to clipboard
      */
-    $('button#copyDiscordPing').on('click', function() {
+    var copyDiscordPing = (function() {
         /**
-         * copy permalink to clipboard
+         * copy text to clipboard
          *
          * @type Clipboard
          */
@@ -230,5 +247,47 @@ jQuery(document).ready(function($) {
 
             clipboardDiscordPingData.destroy();
         });
+    });
+
+    /* Events
+    ----------------------------------------------------------------------------------------------------------------- */
+
+    /**
+     * toggle "Formup NOW" checkbox when "Pre-Ping" is toggled
+     *
+     * Behaviour:
+     *  Pre-Ping checked » Formup NOW unchecked
+     *  Pre-Ping unchecked » Formup NOW checked
+     */
+    $('#prePing').on('change', function() {
+        if($('input#prePing').is(':checked')) {
+            $('#formupTimeNow').removeAttr('checked');
+            $('#formupTime').removeAttr('disabled');
+        } else {
+            $('#formupTimeNow').prop('checked', true);
+            $('#formupTime').prop('disabled', true);
+        }
+    });
+
+    $('#formupTimeNow').on('change', function() {
+        if($('input#formupTimeNow').is(':checked')) {
+            $('#formupTime').prop('disabled', true);
+        } else {
+            $('#formupTime').removeAttr('disabled');
+        }
+    });
+
+    /**
+     * generate ping text
+     */
+    $('button#createPingText').on('click', function() {
+        generateDiscordPing();
+    });
+
+    /**
+     * copy ping text
+     */
+    $('button#copyDiscordPing').on('click', function() {
+        copyDiscordPing();
     });
 });
