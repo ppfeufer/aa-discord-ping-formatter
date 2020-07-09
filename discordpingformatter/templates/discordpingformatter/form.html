@@ -35,9 +35,22 @@
             <div class="col-md-9">
                 <select id="pingChannel" name="pingChannel" class="form-control">
                     <option value="">None, just format it for me</option>
-                    {% for pingWebhook in additionalPingWebhooks %}
-                        <option value="{{ pingWebhook.discordWebhookUrl }}">{{ pingWebhook.discordChannelName }}</option>
-                    {% endfor %}
+
+                    {% load update_variable %}
+                    {% with "false" as showOption %}
+                        {% for pingWebhook in additionalPingWebhooks %}
+                            {% update_variable "false" as showOption %}
+
+                            {% for group in userGroups %}
+                                {% if showOption == "false" %}
+                                    {% if pingWebhook.restrictedToGroup|length == 0 or group.id in pingWebhook.restrictedToGroup %}
+                                        <option value="{{ pingWebhook.discordWebhookUrl }}">{{ pingWebhook.discordChannelName }}</option>
+                                        {% update_variable "true" as showOption %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    {% endwith %}
                 </select>
             </div>
         </div>
@@ -68,7 +81,7 @@
     <div class="form-group clearfix">
         <label class="col-md-3 control-label" for="fcName">FC Name</label>
         <div class="col-md-9">
-            <input id="fcName" name="fcName" type="text" class="form-control input-md">
+            <input id="fcName" name="fcName" type="text" class="form-control input-md" value="{{ mainCharacter }}">
         </div>
     </div>
 

@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.1.8] - 2020-07-09
+### Added
+- Webhook group restrictions. Webhooks can now be restricted to certain groups (see [README](https://github.com/ppfeufer/aa-discord-ping-formatter#adding-ping-channels)), so not everyone who has access too this module can ping through all webhooks. Webhoos without restrictions are accessible for all with access to the module. (Thanks to Exiom for bringing this up)
+- FC name is pre-filled with the users main character name, since the user is most likely te FC pinging for his own fleet.
+
+### Changed
+- Formup Time is now a proper date picker so there is a consistent date/time format throughout the pings
+- Formup Time disabled by default. To enable it either check the Pre-Ping checkbox or disable the Formup NOW checkbox below the Formup Time field
+- Formup Time is set to NOW by default
+
 ## [0.1.7] - 2020-07-08
 ### Added
 - Link to timezones conversion on formup time if the [aa-timezones](https://github.com/ppfeufer/aa-timezones) module is installed
