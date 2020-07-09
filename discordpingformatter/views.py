@@ -14,13 +14,19 @@ from .app_settings import (
 @login_required
 @permission_required('discordpingformatter.basic_access')
 def index(request):
+    groups = request.user.groups.all()
+    groups = groups.order_by('name')
+
     context = {
         'title': __title__,
         'additionalPingTargets': AA_DISCORDFORMATTER_ADDITIONAL_PING_TARGETS,
         'additionalFleetTypes': AA_DISCORDFORMATTER_ADDITIONAL_FLEET_TYPES,
         'additionalPingWebhooks': AA_DISCORDFORMATTER_ADDITIONAL_PING_WEBHOOKS,
         'site_url': get_site_url(),
-        'timezones_installed': timezones_installed()
+        'timezones_installed': timezones_installed(),
+        'userGroups': groups,
+        'authUser': request.user,
+        'mainCharacter': request.user.profile.main_character
     }
 
     return render(request, 'discordpingformatter/index.html', context)

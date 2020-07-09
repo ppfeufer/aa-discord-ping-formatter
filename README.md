@@ -68,11 +68,11 @@ Finally restart your AA supervisor services.
 
 ### View in Alliance Auth
 
-![AA View](https://raw.githubusercontent.com/ppfeufer/aa-discord-ping-formatter/development/discordpingformatter/docs/aa-view.jpg)
+![AA View](https://raw.githubusercontent.com/ppfeufer/aa-discord-ping-formatter/master/discordpingformatter/docs/aa-view.jpg)
 
 ### Discord Ping
 
-![Discord Ping](https://raw.githubusercontent.com/ppfeufer/aa-discord-ping-formatter/development/discordpingformatter/docs/discord-ping.jpg)
+![Discord Ping](https://raw.githubusercontent.com/ppfeufer/aa-discord-ping-formatter/master/discordpingformatter/docs/discord-ping.jpg)
 
 ## Configuration
 
@@ -127,6 +127,15 @@ AA_DISCORDFORMATTER_ADDITIONAL_PING_WEBHOOKS = [
     },
     {
         'discordChannelName': 'Pre Pings (#pre-pings)',
+        'discordWebhookUrl': 'https://discordapp.com/api/webhooks/xxxxxxxxxxxxxxxxxx/yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
+    },
+    {
+        # restricted to "Capital FCs" (GroupID 5) and "Super Capital FCs" (GroupID 7)
+        'restrictedToGroup': [
+            5,
+            7,
+        ],
+        'discordChannelName': 'Capital Pings (#capital-pings)',
         'discordWebhookUrl': 'https://discordapp.com/api/webhooks/xxxxxxxxxxxxxxxxxx/yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
     }
 ]
