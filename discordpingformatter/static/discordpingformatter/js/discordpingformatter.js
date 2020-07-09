@@ -1,4 +1,4 @@
-/* global timezonesInstalled, siteUrl */
+/* global timezonesInstalled, siteUrl, pingCreator */
 
 jQuery(document).ready(function($) {
     /* Functions
@@ -209,6 +209,12 @@ jQuery(document).ready(function($) {
 
         // ping it directly if a webhook is selected
         if(discordWebhook !== false && discordWebhook !== '') {
+            // add ping creator at the end
+            if(pingCreator !== '') {
+                discordPingText += "\n\n" + '*(Ping sent by: ' + pingCreator + ')*'
+            }
+
+            // send the ping
             sendDiscordPing(discordWebhook, webhookPingTarget + discordPingText);
 
             // tell the FC that it's already pinged
@@ -256,15 +262,17 @@ jQuery(document).ready(function($) {
      * toggle "Formup NOW" checkbox when "Pre-Ping" is toggled
      *
      * Behaviour:
-     *  Pre-Ping checked » Formup NOW unchecked
-     *  Pre-Ping unchecked » Formup NOW checked
+     *  Pre-Ping checked » Formup NOW unchecked and disabled
+     *  Pre-Ping unchecked » Formup NOW checked and enabled
      */
     $('#prePing').on('change', function() {
         if($('input#prePing').is(':checked')) {
             $('#formupTimeNow').removeAttr('checked');
+            $('#formupTimeNow').prop('disabled', true);
             $('#formupTime').removeAttr('disabled');
         } else {
             $('#formupTimeNow').prop('checked', true);
+            $('#formupTimeNow').removeAttr('disabled');
             $('#formupTime').prop('disabled', true);
         }
     });
