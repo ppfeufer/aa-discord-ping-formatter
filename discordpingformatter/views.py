@@ -25,7 +25,6 @@ def index(request):
         'site_url': get_site_url(),
         'timezones_installed': timezones_installed(),
         'userGroups': groups,
-        'authUser': request.user,
         'mainCharacter': request.user.profile.main_character
     }
 
