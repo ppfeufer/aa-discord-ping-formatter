@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.1.x] - xxxx-xx-xx
 ### Added
 - Option to embed automatic pings via webhook (#13)
+- Embedded ping via webhook are color coded. Pre-defined fleet types are by default (Roam = green, Home Defense = yellow, StratOP = orange, CTA = red) and custom fleet types can be defined via settings (see [README](https://github.com/ppfeufer/aa-discord-ping-formatter#embed-webhook-pings))
 
 ### Changed
 - Link to time zones conversion is now a named link
