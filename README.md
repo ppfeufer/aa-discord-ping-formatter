@@ -72,9 +72,20 @@ Finally restart your AA supervisor services.
 
 ### Discord Ping
 
-![Discord Ping](https://raw.githubusercontent.com/ppfeufer/aa-discord-ping-formatter/master/discordpingformatter/docs/discord-ping.jpg)
+![Discord Ping Examples](https://raw.githubusercontent.com/ppfeufer/aa-discord-ping-formatter/master/discordpingformatter/docs/ping-examples.jpg)
+
+_(Example for embedded ping (top) and non embedded ping (bottom))_
 
 ## Configuration
+
+### Embed Webhook Pings
+
+You have the option to embed your webhook pings. To do so you can enable it via:
+
+```python
+## AA Discord Ping Formatter
+AA_DISCORDFORMATTER_WEBHOOK_EMBED_PING = True
+```
 
 ### Adding Ping Targets
 
@@ -108,10 +119,18 @@ Open your `local.py` in an editor of your choice and add the following at the en
 ```python
 ## AA Discord Ping Formatter
 AA_DISCORDFORMATTER_ADDITIONAL_FLEET_TYPES = [
-    'Mining',
+    # example for embedded webhook pings
+    {
+        'fleetType': 'Mining',
+        'embedColor': '#4F545C' # can be empty but needs to be set
+    },
+
+    # example for non embedded webhook pings
     'Ratting',
 ]
 ```
+
+Both examples will work, no matter if you have `AA_DISCORDFORMATTER_WEBHOOK_EMBED_PING` enabled or not. But keep in mind, to set a custom color for your embed, it needs to be defined like in the first example. The color needs to be your standard hex color code like you define it in (for example) CSS as well.
 
 ### Adding Ping Channels
 Per default, your ping will just be formatted for you to copy and paste. But, if your FCs are too lazy even for that, you can configure webhooks. One for each channel you might want to ping.

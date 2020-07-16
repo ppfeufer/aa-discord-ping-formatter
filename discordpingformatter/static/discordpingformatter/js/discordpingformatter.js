@@ -1,4 +1,4 @@
-/* global timezonesInstalled, siteUrl, pingCreator */
+/* global discordPingformatterSettings */
 
 jQuery(document).ready(function($) {
     /* Functions
@@ -70,7 +70,34 @@ jQuery(document).ready(function($) {
      * @returns {undefined}
      */
     var sanitizeInput = (function(input) {
-        return input.replace(/<(|\/|[^>\/bi]|\/[^>bi]|[^\/>][^>]+|\/[^>][^>]+)>/g, '');
+        if(input) {
+            return input.replace(/<(|\/|[^>\/bi]|\/[^>bi]|[^\/>][^>]+|\/[^>][^>]+)>/g, '');
+        } else {
+            return input;
+        }
+    });
+
+    /**
+     * send an embedded message to a Discord webhook
+     *
+     * @param {string} discordWebhook
+     * @param {string} content
+     * @param {array} embeds
+     */
+    var sendEmbeddedDiscordPing = (function(discordWebhook, content, embeds) {
+        var request = new XMLHttpRequest();
+
+        request.open("POST", discordWebhook);
+        request.setRequestHeader('Content-type', 'application/json');
+
+        var params = {
+            username: "",
+            avatar_url: "",
+            content: content,
+            embeds: [embeds]
+        };
+
+        request.send(JSON.stringify(params));
     });
 
     /**
@@ -94,11 +121,21 @@ jQuery(document).ready(function($) {
         request.send(JSON.stringify(params));
     });
 
+    /**
+     * convert hex color code in something Discord can handle
+     *
+     * @param {string} hexValue
+     */
+    var hexToDecimal = (function(hexValue) {
+        return parseInt(hexValue.replace('#',''), 16);
+    });
+
     // generate the ping text
     var generateDiscordPing = (function() {
         var pingTarget = sanitizeInput($('select#pingTarget option:selected').val());
         var pingTargetText = sanitizeInput($('select#pingTarget option:selected').text());
         var fleetType = sanitizeInput($('select#fleetType option:selected').val());
+        var webhookEmbedColor = sanitizeInput($('select#fleetType option:selected').data('embed-color'));
         var fcName = sanitizeInput($('input#fcName').val());
         var fleetName = sanitizeInput($('input#fleetName').val());
         var formupLocation = sanitizeInput($('input#formupLocation').val());
@@ -117,6 +154,9 @@ jQuery(document).ready(function($) {
 
         $('.aa-discord-ping-formatter-ping').show();
 
+        var discordWebhookPingTextHeader = '';
+        var discordWebhookPingTextContent = '';
+        var discordWebhookPingTextFooter = '';
         var discordPingText = '';
 
         // determine pingTargetText
@@ -133,22 +173,29 @@ jQuery(document).ready(function($) {
             webhookPingTarget = '<@&' + pingTarget + '>';
         }
 
+        // separator
         discordPingText += ' :: ';
+
+        // fleet announcement
         discordPingText += '**';
 
-        // check if it's a preping or not
+        // check if it's a pre-ping or not
         if($('input#prePing').is(':checked')) {
             discordPingText += '### PRE PING ###';
+            discordWebhookPingTextHeader += '### PRE PING ###';
 
             if(fleetType !== '') {
                 discordPingText += ' / ' + fleetType + ' Fleet';
+                discordWebhookPingTextHeader += ' / ' + fleetType + ' Fleet';
             }
         } else {
             if(fleetType !== '') {
                 discordPingText += fleetType + ' ';
+                discordWebhookPingTextHeader += fleetType + ' ';
             }
 
             discordPingText += 'Fleet is up';
+            discordWebhookPingTextHeader += 'Fleet is up';
         }
 
         discordPingText += '**' + "\n";
@@ -156,31 +203,37 @@ jQuery(document).ready(function($) {
         // check if FC name is available
         if(fcName !== '') {
             discordPingText += "\n" + '**FC:** ' + fcName;
+            discordWebhookPingTextContent += "\n" + '**FC:** ' + fcName;
         }
 
         // check if fleet name is available
         if(fleetName !== '') {
             discordPingText += "\n" + '**Fleet Name:** ' + fleetName;
+            discordWebhookPingTextContent += "\n" + '**Fleet Name:** ' + fleetName;
         }
 
-        // check if formup location is available
+        // check if form-up location is available
         if(formupLocation !== '') {
             discordPingText += "\n" + '**Formup Location:** ' + formupLocation;
+            discordWebhookPingTextContent += "\n" + '**Formup Location:** ' + formupLocation;
         }
 
-        // check if formup time is available
+        // check if form-up time is available
         if($('input#formupTimeNow').is(':checked')) {
             discordPingText += "\n" + '**Formup Time:** NOW';
+            discordWebhookPingTextContent += "\n" + '**Formup Time:** NOW';
         } else {
             if(formupTime !== '') {
                 discordPingText += "\n" + '**Formup Time:** ' + formupTime;
+                discordWebhookPingTextContent += "\n" + '**Formup Time:** ' + formupTime;
 
                 // get the timestamp and build the link to the timezones module if it's installed
-                if(timezonesInstalled === true) {
+                if(discordPingformatterSettings.timezonesInstalled === true) {
                     var formupTimestamp = ((new Date(formupTime + ' UTC')).getTime()) / 1000;
-                    var timezonesUrl = siteUrl + 'timezones/?#' + formupTimestamp;
+                    var timezonesUrl = discordPingformatterSettings.siteUrl + 'timezones/?#' + formupTimestamp;
 
-                    discordPingText += ' ([Time Zone Conversion](' + timezonesUrl + '))';
+                    discordPingText += ' - ' + timezonesUrl;
+                    discordWebhookPingTextContent += ' ([Time Zone Conversion](' + timezonesUrl + '))';
                 }
             }
         }
@@ -188,21 +241,25 @@ jQuery(document).ready(function($) {
         // check if fleet comms is available
         if(fleetComms !== '') {
             discordPingText += "\n" + '**Comms:** ' + fleetComms;
+            discordWebhookPingTextContent += "\n" + '**Comms:** ' + fleetComms;
         }
 
         // check if doctrine is available
         if(fleetDoctrine !== '') {
             discordPingText += "\n" + '**Ships / Doctrine:** ' + fleetDoctrine;
+            discordWebhookPingTextContent += "\n" + '**Ships / Doctrine:** ' + fleetDoctrine;
         }
 
         // check if srp is available
         if(fleetSrp !== '') {
             discordPingText += "\n" + '**SRP:** ' + fleetSrp;
+            discordWebhookPingTextContent += "\n" + '**SRP:** ' + fleetSrp;
         }
 
         // check if additional information is available
         if(additionalInformation !== '') {
             discordPingText += "\n\n" + '**Additional Information**:' + "\n" + additionalInformation;
+            discordWebhookPingTextContent += "\n\n" + '**Additional Information**:' + "\n" + additionalInformation;
         }
 
         $('.aa-discord-ping-formatter-ping-text').html('<p>' + nl2br(discordPingTarget + discordPingText) + '</p>');
@@ -210,12 +267,35 @@ jQuery(document).ready(function($) {
         // ping it directly if a webhook is selected
         if(discordWebhook !== false && discordWebhook !== '') {
             // add ping creator at the end
-            if(pingCreator !== '') {
-                discordPingText += "\n\n" + '*(Ping sent by: ' + pingCreator + ')*';
+            if(discordPingformatterSettings.pingCreator !== '') {
+                discordPingText += "\n\n" + '*(Ping sent by: ' + discordPingformatterSettings.pingCreator + ')*';
+                discordWebhookPingTextFooter = '(Ping sent by: ' + discordPingformatterSettings.pingCreator + ')';
             }
 
             // send the ping
-            sendDiscordPing(discordWebhook, webhookPingTarget + discordPingText);
+            if(discordPingformatterSettings.embedPing === true) {
+                var embedColor = '#FAA61A';
+
+                if(fleetType !== '' && embedColor !== '') {
+                    embedColor = webhookEmbedColor;
+                }
+
+                sendEmbeddedDiscordPing(
+                    discordWebhook,
+                    webhookPingTarget,
+                    // embedded content » https://leovoel.github.io/embed-visualizer/
+                    {
+                        'title': discordWebhookPingTextHeader,
+                        'description': discordWebhookPingTextContent,
+                        'color': hexToDecimal(embedColor),
+                        'footer': {
+                            'text': discordWebhookPingTextFooter
+                        }
+                    }
+                );
+            } else {
+                sendDiscordPing(discordWebhook, webhookPingTarget + discordPingText);
+            }
 
             // tell the FC that it's already pinged
             showSuccess('Success, your ping has been sent to your Discord.', '.aa-discord-ping-formatter-ping-copyresult');
