@@ -36,21 +36,24 @@
                 <select id="pingChannel" name="pingChannel" class="form-control">
                     <option value="">None, just format it for me</option>
 
-                    {% load update_variable %}
-                    {% with "false" as showOption %}
-                        {% for pingWebhook in additionalPingWebhooks %}
-                            {% update_variable "false" as showOption %}
+                    <option value="" disabled></option>
+                    <optgroup label="Configured ping channels">
+                        {% load update_variable %}
+                        {% with "false" as showOption %}
+                            {% for pingWebhook in additionalPingWebhooks %}
+                                {% update_variable "false" as showOption %}
 
-                            {% for group in userGroups %}
-                                {% if showOption == "false" %}
-                                    {% if pingWebhook.restrictedToGroup|length == 0 or group.id in pingWebhook.restrictedToGroup %}
-                                        <option value="{{ pingWebhook.discordWebhookUrl }}">{{ pingWebhook.discordChannelName }}</option>
-                                        {% update_variable "true" as showOption %}
+                                {% for group in userGroups %}
+                                    {% if showOption == "false" %}
+                                        {% if pingWebhook.restrictedToGroup|length == 0 or group.id in pingWebhook.restrictedToGroup %}
+                                            <option value="{{ pingWebhook.discordWebhookUrl }}">{{ pingWebhook.discordChannelName }}</option>
+                                            {% update_variable "true" as showOption %}
+                                        {% endif %}
                                     {% endif %}
-                                {% endif %}
+                                {% endfor %}
                             {% endfor %}
-                        {% endfor %}
-                    {% endwith %}
+                        {% endwith %}
+                    </optgroup>
                 </select>
             </div>
         </div>
@@ -61,16 +64,20 @@
         <div class="col-md-9">
             <select id="fleetType" name="fleetType" class="form-control">
                 <option value="">Please select</option>
-                <option value="Roaming">Roam</option>
-                <option value="Home Defense">Home Defense</option>
-                <option value="StratOP">StratOP</option>
-                <option value="CTA">CTA</option>
+                <option value="Roaming" data-embed-color="#81FD2D">Roam</option>
+                <option value="Home Defense" data-embed-color="#F1C40F">Home Defense</option>
+                <option value="StratOP" data-embed-color="#E67E22">StratOP</option>
+                <option value="CTA" data-embed-color="#E91E63">CTA</option>
 
                 {% if additionalFleetTypes|length > 0 %}
                     <option value="" disabled></option>
                     <optgroup label="Additionally configured fleet types">
                         {% for fleetType in additionalFleetTypes %}
-                            <option value="{{ fleetType }}">{{ fleetType }}</option>
+                            {% if fleetType.fleetType %}
+                                <option value="{{ fleetType.fleetType }}" data-embed-color="{{ fleetType.embedColor }}">{{ fleetType.fleetType }}</option>
+                            {% else %}
+                                <option value="{{ fleetType }}" data-embed-color="#FAA61A">{{ fleetType }}</option>
+                            {% endif %}
                         {% endfor %}
                     </optgroup>
                 {% endif %}
@@ -156,7 +163,10 @@
 </fieldset>
 
 <script type="text/javascript">
-    var timezonesInstalled = {{ timezones_installed|yesno:"true,false" }};
-    var siteUrl = '{{ site_url }}/';
-    var pingCreator = '{{ mainCharacter }}';
+    var discordPingformatterSettings = {
+        timezonesInstalled: {{ timezones_installed|yesno:"true,false" }},
+        embedPing: {{ embedPing|yesno:"true,false" }},
+        siteUrl: '{{ site_url }}/',
+        pingCreator: '{{ mainCharacter }}'
+    };
 </script>
