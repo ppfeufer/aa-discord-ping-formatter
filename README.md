@@ -101,6 +101,11 @@ AA_DISCORDFORMATTER_ADDITIONAL_PING_TARGETS = [
         'roleName': 'Member'
     },
     {
+        # restricted to "Capital FCs" (GroupID 5) and "Super Capital FCs" (GroupID 7)
+        'restrictedToGroup': [
+            5,
+            7,
+        ],
         'roleId': 'xxxxxxxxxxxxxxxxxx',
         'roleName': 'Capital Pilots'
     },
