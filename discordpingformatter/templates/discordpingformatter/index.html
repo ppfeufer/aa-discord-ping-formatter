@@ -4,15 +4,15 @@
 {% load static %}
 
 {% block details %}
-<div class="aa-discord-ping-formatter row">
-    <div class="col-md-6">
-        {% include "discordpingformatter/form.html" %}
-    </div>
+    <div class="aa-discord-ping-formatter row">
+        <div class="col-md-6">
+            {% include "discordpingformatter/form.html" %}
+        </div>
 
-    <div class="col-md-6">
-        {% include 'discordpingformatter/ping.html' %}
+        <div class="col-md-6">
+            {% include 'discordpingformatter/ping.html' %}
+        </div>
     </div>
-</div>
 {% endblock %}
 
 {% block extra_javascript %}
@@ -30,6 +30,8 @@
     $('#formupTime').datetimepicker({
         lang: '{{ LANGUAGE_CODE }}',
         maskInput: true,
-        format: 'Y-m-d H:i'
+        format: 'Y-m-d H:i',
+        dayOfWeekStart: 1,
+        step: 15
     });
 {% endblock extra_script %}

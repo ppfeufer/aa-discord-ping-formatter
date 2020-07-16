@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.1.x] - xxxx-xx-xx
+### Added
+- Restriction for ping targets. Just to make sure not everyone can ping for Capitals or even Supers and Titans if these are configured ping targets.
+
+### Changed
+- Set time selection steps to 15 minutes instead of 60 in te datepicker
+- Set Monday as the beginning of the week in the datepicker
+
+### Fixed 
+- Our Australian time travelers and everyone else who lives in the future (UTC+x) is now able to pre-ping fleets that are coming up in 2 hours Eve time, which might still be in their past local time, depending on how far in the future they live.
+
 ## [0.1.10] - 2020-07-16
 ### Added
 - Option to embed automatic pings via webhook (#13)

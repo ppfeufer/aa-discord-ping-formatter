@@ -9,9 +9,21 @@
                 {% if additionalPingTargets|length > 0 %}
                     <option value="" disabled></option>
                     <optgroup label="Additionally configured ping targets">
-                        {% for pingTarget in additionalPingTargets %}
-                            <option value="{{ pingTarget.roleId }}">@{{ pingTarget.roleName }}</option>
-                        {% endfor %}
+                        {% load update_variable %}
+                        {% with "false" as showPingTarget %}
+                            {% for pingTarget in additionalPingTargets %}
+                                {% update_variable "false" as showPingTarget %}
+
+                                {% for group in userGroups %}
+                                    {% if showPingTarget == "false" %}
+                                        {% if pingTarget.restrictedToGroup|length == 0 or group.id in pingTarget.restrictedToGroup %}
+                                            <option value="{{ pingTarget.roleId }}">@{{ pingTarget.roleName }}</option>
+                                            {% update_variable "true" as showPingTarget %}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        {% endwith %}
                     </optgroup>
                 {% endif %}
             </select>
@@ -39,15 +51,15 @@
                     <option value="" disabled></option>
                     <optgroup label="Configured ping channels">
                         {% load update_variable %}
-                        {% with "false" as showOption %}
+                        {% with "false" as showWebhook %}
                             {% for pingWebhook in additionalPingWebhooks %}
-                                {% update_variable "false" as showOption %}
+                                {% update_variable "false" as showWebhook %}
 
                                 {% for group in userGroups %}
-                                    {% if showOption == "false" %}
+                                    {% if showWebhook == "false" %}
                                         {% if pingWebhook.restrictedToGroup|length == 0 or group.id in pingWebhook.restrictedToGroup %}
                                             <option value="{{ pingWebhook.discordWebhookUrl }}">{{ pingWebhook.discordChannelName }}</option>
-                                            {% update_variable "true" as showOption %}
+                                            {% update_variable "true" as showWebhook %}
                                         {% endif %}
                                     {% endif %}
                                 {% endfor %}
