@@ -141,7 +141,7 @@ jQuery(document).ready(function($) {
             discordPingText += '### PRE PING ###';
 
             if(fleetType !== '') {
-                discordPingText += ' / ' + fleetType + ' Fleet'
+                discordPingText += ' / ' + fleetType + ' Fleet';
             }
         } else {
             if(fleetType !== '') {
@@ -180,7 +180,7 @@ jQuery(document).ready(function($) {
                     var formupTimestamp = ((new Date(formupTime + ' UTC')).getTime()) / 1000;
                     var timezonesUrl = siteUrl + 'timezones/?#' + formupTimestamp;
 
-                    discordPingText += ' - ' + timezonesUrl;
+                    discordPingText += ' ([Time Zone Conversion](' + timezonesUrl + '))';
                 }
             }
         }
@@ -211,7 +211,7 @@ jQuery(document).ready(function($) {
         if(discordWebhook !== false && discordWebhook !== '') {
             // add ping creator at the end
             if(pingCreator !== '') {
-                discordPingText += "\n\n" + '*(Ping sent by: ' + pingCreator + ')*'
+                discordPingText += "\n\n" + '*(Ping sent by: ' + pingCreator + ')*';
             }
 
             // send the ping
