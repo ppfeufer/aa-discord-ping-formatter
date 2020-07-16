@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.1.x] - xxxx-xx-xx
+### Added
+- Restriction for ping targets. Just to make sure not everyone can ping for Capitals or even Supers and Titans if these are configured ping targets.
+
 ### Changed
 - Set time selection steps to 15 minutes instead of 60 in te datepicker
 - Set Monday as the beginning of the week in the datepicker
