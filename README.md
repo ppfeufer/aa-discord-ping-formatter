@@ -164,3 +164,38 @@ AA_DISCORDFORMATTER_ADDITIONAL_PING_WEBHOOKS = [
     }
 ]
 ```
+
+### Fleet Comms, Formup Location and Doctrine
+
+Values for Fleet Comms, Formup Location and Doctrine can be pre-defined as suggestions, so your FCs have a quick selection of the most used comms, stagings and doctrines to select from. These are not fixed values in the form, since we use a combination of input and select fields here. So FCs are absolutely free to something completely different in those 3 fields than the pre-defined suggestions.
+
+To define these 3 fields, open your `local.py` in an editor of your choice and add the following:
+
+Fleet Comms
+```python
+## AA Discord Ping Formatter
+AA_DISCORDFORMATTER_FLEET_COMMS = [
+    'Alliance Mumble',
+    'Coalition Mumble',
+    'Spy Account Mumble' # :-P
+]
+```
+
+Fleet Staging
+```python
+## AA Discord Ping Formatter
+AA_DISCORDFORMATTER_FLEET_FORMUP_LOCATIONS = [
+    'Alliance Staging System',
+    'Coalition Staging System'
+]
+```
+
+Doctrine
+```python
+## AA Discord Ping Formatter
+AA_DISCORDFORMATTER_FLEET_DOCTRINES = [
+    'Battle Skiffs',
+    'Combat Nereus',
+    'Attack Corvettes'
+]
+```

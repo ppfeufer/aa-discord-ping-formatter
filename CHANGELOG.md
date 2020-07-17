@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.0] - 2020-07-17
+### Added
+- Configuration for pre-defined fleet comms, formup locations and doctrines. These can be configured in your `local.py` via `AA_DISCORDFORMATTER_FLEET_COMMS`, `AA_DISCORDFORMATTER_FLEET_DOCTRINES` and `AA_DISCORDFORMATTER_FLEET_FORMUP_LOCATIONS`. See [README](https://github.com/ppfeufer/aa-discord-ping-formatter#fleet-comms-formup-location-and-doctrine) for syntax.
+
 ## [1.0.0] - 2020-07-16
 ### Added
 - Restriction for ping targets. Just to make sure not everyone can ping for Capitals or even Supers and Titans if these are configured ping targets. (#18)
