@@ -127,7 +127,7 @@ AA_DISCORDFORMATTER_ADDITIONAL_FLEET_TYPES = [
     # example for embedded webhook pings
     {
         'fleetType': 'Mining',
-        'embedColor': '#4F545C' # can be empty but needs to be set
+        'embedColor': '#4F545C' # can be empty but needs to be set. Needs to be #hex and 6 digits
     },
 
     # example for non embedded webhook pings
@@ -135,7 +135,7 @@ AA_DISCORDFORMATTER_ADDITIONAL_FLEET_TYPES = [
 ]
 ```
 
-Both examples will work, no matter if you have `AA_DISCORDFORMATTER_WEBHOOK_EMBED_PING` enabled or not. But keep in mind, to set a custom color for your embed, it needs to be defined like in the first example. The color needs to be your standard hex color code like you define it in (for example) CSS as well.
+Both examples will work, no matter if you have `AA_DISCORDFORMATTER_WEBHOOK_EMBED_PING` enabled or not. But keep in mind, to set a custom color for your embed, it needs to be defined like in the first example. The color needs to be your standard hex color code like you define it in (for example) CSS as well. Pre-defined fleet types are by default: Roam = green, Home Defense = yellow, StratOP = orange, CTA = red
 
 ### Adding Ping Channels
 Per default, your ping will just be formatted for you to copy and paste. But, if your FCs are too lazy even for that, you can configure webhooks. One for each channel you might want to ping.
