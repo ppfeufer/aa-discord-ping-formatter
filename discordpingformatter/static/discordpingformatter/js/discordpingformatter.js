@@ -130,7 +130,22 @@ jQuery(document).ready(function($) {
         return parseInt(hexValue.replace('#',''), 16);
     });
 
-    // generate the ping text
+    /**
+     * convert the datepicker info into an URL that the
+     * aa-tomezones module understands
+     *
+     * @param {string} formupTime
+     */
+    var getTimezonesUrl = (function(formupTime) {
+        var formupTimestamp = ((new Date(formupTime + ' UTC')).getTime()) / 1000;
+        var timezonesUrl = discordPingformatterSettings.siteUrl + 'timezones/?#' + formupTimestamp;
+
+        return timezonesUrl;
+    });
+
+    /**
+     * create the ping text
+     */
     var generateDiscordPing = (function() {
         var pingTarget = sanitizeInput($('select#pingTarget option:selected').val());
         var pingTargetText = sanitizeInput($('select#pingTarget option:selected').text());
@@ -229,8 +244,7 @@ jQuery(document).ready(function($) {
 
                 // get the timestamp and build the link to the timezones module if it's installed
                 if(discordPingformatterSettings.timezonesInstalled === true) {
-                    var formupTimestamp = ((new Date(formupTime + ' UTC')).getTime()) / 1000;
-                    var timezonesUrl = discordPingformatterSettings.siteUrl + 'timezones/?#' + formupTimestamp;
+                    var timezonesUrl = getTimezonesUrl(formupTime);
 
                     discordPingText += ' - ' + timezonesUrl;
                     discordWebhookPingTextContent += ' ([Time Zone Conversion](' + timezonesUrl + '))';
