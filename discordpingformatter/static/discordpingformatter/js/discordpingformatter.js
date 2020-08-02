@@ -87,12 +87,12 @@ jQuery(document).ready(function($) {
     var sendEmbeddedDiscordPing = (function(discordWebhook, content, embeds) {
         var request = new XMLHttpRequest();
 
-        request.open("POST", discordWebhook);
+        request.open('POST', discordWebhook);
         request.setRequestHeader('Content-type', 'application/json');
 
         var params = {
-            username: "",
-            avatar_url: "",
+            username: '',
+            avatar_url: '',
             content: content,
             embeds: [embeds]
         };
@@ -109,12 +109,12 @@ jQuery(document).ready(function($) {
     var sendDiscordPing = (function(discordWebhook, discordPingText) {
         var request = new XMLHttpRequest();
 
-        request.open("POST", discordWebhook);
+        request.open('POST', discordWebhook);
         request.setRequestHeader('Content-type', 'application/json');
 
         var params = {
-            username: "",
-            avatar_url: "",
+            username: '',
+            avatar_url: '',
             content: discordPingText
         };
 
@@ -296,10 +296,10 @@ jQuery(document).ready(function($) {
 
                 sendEmbeddedDiscordPing(
                     discordWebhook,
-                    webhookPingTarget,
-                    // embedded content » https://leovoel.github.io/embed-visualizer/
+                    webhookPingTarget + ' :: **' + discordWebhookPingTextHeader + ' under ' + fcName + '**' + "\n" + '** **',
+                    // embedded content » https://discohook.org/ - https://leovoel.github.io/embed-visualizer/
                     {
-                        'title': discordWebhookPingTextHeader,
+                        'title': '**.: Fleet Details :.**',
                         'description': discordWebhookPingTextContent,
                         'color': hexToDecimal(embedColor),
                         'footer': {
@@ -312,7 +312,10 @@ jQuery(document).ready(function($) {
             }
 
             // tell the FC that it's already pinged
-            showSuccess('Success, your ping has been sent to your Discord.', '.aa-discord-ping-formatter-ping-copyresult');
+            showSuccess(
+                'Success, your ping has been sent to your Discord.',
+                '.aa-discord-ping-formatter-ping-copyresult'
+            );
         }
     });
 
@@ -333,7 +336,10 @@ jQuery(document).ready(function($) {
          * @param {type} e
          */
         clipboardDiscordPingData.on('success', function(e) {
-            showSuccess('Success, Ping copied to clipboard. Now be a good FC and throw it in your Discord so you actually get some people in fleet.', '.aa-discord-ping-formatter-ping-copyresult');
+            showSuccess(
+                'Success, Ping copied to clipboard. Now be a good FC and throw it in your Discord so you actually get some people in fleet.',
+                '.aa-discord-ping-formatter-ping-copyresult'
+            );
 
             e.clearSelection();
             clipboardDiscordPingData.destroy();
@@ -343,7 +349,10 @@ jQuery(document).ready(function($) {
          * copy error
          */
         clipboardDiscordPingData.on('error', function() {
-            showError('Error, Ping not copied to clipboard.', '.aa-discord-ping-formatter-ping-copyresult');
+            showError(
+                'Error, Ping not copied to clipboard.',
+                '.aa-discord-ping-formatter-ping-copyresult'
+            );
 
             clipboardDiscordPingData.destroy();
         });
