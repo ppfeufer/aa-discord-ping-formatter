@@ -5,8 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.1.1] - xxxx-xx-xx
+## [1.1.1] - 2020-08-02
+### Changed
 - JS modularizing, creation of the link for aa-timezones moved to its own function
+- Added a bit more information to the embedded ping, so on mobile phones or system notification there is a bit more than just `@everyone` or `@here` to see.
 
 ## [1.1.0] - 2020-07-17
 ### Added
