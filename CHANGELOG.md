@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.2] - 2020-08-02
+### Fixed
+- Missing "Fleet" on embedded pings headline when no fleet type is selected
+
 ## [1.1.1] - 2020-08-02
 ### Changed
 - JS modularizing, creation of the link for aa-timezones moved to its own function
