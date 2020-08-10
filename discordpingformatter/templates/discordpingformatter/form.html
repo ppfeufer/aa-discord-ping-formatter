@@ -48,6 +48,6 @@
         timezonesInstalled: {{ timezones_installed|yesno:"true,false" }},
         embedPing: {{ embedPing|yesno:"true,false" }},
         siteUrl: '{{ site_url }}/',
-        pingCreator: '{{ mainCharacter }}'
+        pingCreator: '{{ mainCharacter|addslashes }}'
     };
 </script>

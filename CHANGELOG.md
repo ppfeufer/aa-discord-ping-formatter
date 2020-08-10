@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.1.2] - 2020-08-02
 ### Fixed
 - Missing "Fleet" on embedded pings headline when no fleet type is selected
+- Hopefully escaped possible single quotes in a characters name so they will not be transformed into their respective HTML-entities in a ping
 
 ## [1.1.1] - 2020-08-02
 ### Changed
