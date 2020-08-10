@@ -202,6 +202,9 @@ jQuery(document).ready(function($) {
             if(fleetType !== '') {
                 discordPingText += ' / ' + fleetType + ' Fleet';
                 discordWebhookPingTextHeader += ' / ' + fleetType + ' Fleet';
+            } else {
+                discordPingText += ' / Fleet';
+                discordWebhookPingTextHeader += ' / Fleet';
             }
         } else {
             if(fleetType !== '') {
