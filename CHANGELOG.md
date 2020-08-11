@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.3] - 2020-08-11
+### Fixed
+- Single quote issue finally fixed (#31)
+
 ## [1.1.2] - 2020-08-10
 ### Fixed
 - Missing "Fleet" on embedded pings headline when no fleet type is selected
