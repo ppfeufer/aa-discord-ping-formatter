@@ -297,9 +297,14 @@ jQuery(document).ready(function($) {
                     embedColor = webhookEmbedColor;
                 }
 
+                // add fcName if we have one
+                if(fcName !== '') {
+                    discordWebhookPingTextHeader += ' under ' + fcName;
+                }
+
                 sendEmbeddedDiscordPing(
                     discordWebhook,
-                    webhookPingTarget + ' :: **' + discordWebhookPingTextHeader + ' under ' + fcName + '**' + "\n" + '** **',
+                    webhookPingTarget + ' :: **' + discordWebhookPingTextHeader + '**' + "\n" + '** **',
                     // embedded content » https://discohook.org/ - https://leovoel.github.io/embed-visualizer/
                     {
                         'title': '**.: Fleet Details :.**',
