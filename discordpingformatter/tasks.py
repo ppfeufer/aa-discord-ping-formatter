@@ -1,4 +1,5 @@
 from celery import shared_task
+
 import logging
 
 
@@ -10,7 +11,6 @@ logger = logging.getLogger(__name__)
 Example task:
 
 @shared_task
-def my_task():
+def my_task(): 
     pass
 """
-   
