@@ -6,13 +6,13 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('discordpingformatter', '0004_auto_20200911_1727'),
+        ("discordpingformatter", "0004_auto_20200911_1727"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='webhook',
-            old_name='channel',
-            new_name='name',
+            model_name="webhook",
+            old_name="channel",
+            new_name="name",
         ),
     ]

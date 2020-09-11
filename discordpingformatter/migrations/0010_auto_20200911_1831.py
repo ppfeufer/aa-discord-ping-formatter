@@ -6,38 +6,90 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('discordpingformatter', '0009_discordpingtargets'),
+        ("discordpingformatter", "0009_discordpingtargets"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='FleetType',
+            name="FleetType",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(help_text='Short name to identify this fleet type', max_length=255, unique=True)),
-                ('embed_color', models.CharField(help_text='Hightlight color for the embed', max_length=7, unique=True)),
-                ('notes', models.TextField(blank=True, default=None, help_text='You can add notes about this configuration here if you want', null=True)),
-                ('is_enabled', models.BooleanField(db_index=True, default=True, help_text='Whether this fleet type is enabled or not')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        help_text="Short name to identify this fleet type",
+                        max_length=255,
+                        unique=True,
+                    ),
+                ),
+                (
+                    "embed_color",
+                    models.CharField(
+                        help_text="Hightlight color for the embed",
+                        max_length=7,
+                        unique=True,
+                    ),
+                ),
+                (
+                    "notes",
+                    models.TextField(
+                        blank=True,
+                        default=None,
+                        help_text="You can add notes about this configuration here if you want",
+                        null=True,
+                    ),
+                ),
+                (
+                    "is_enabled",
+                    models.BooleanField(
+                        db_index=True,
+                        default=True,
+                        help_text="Whether this fleet type is enabled or not",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Fleet Type',
-                'verbose_name_plural': 'Fleet Types',
-                'default_permissions': (),
+                "verbose_name": "Fleet Type",
+                "verbose_name_plural": "Fleet Types",
+                "default_permissions": (),
             },
         ),
         migrations.AlterField(
-            model_name='fleetcomm',
-            name='notes',
-            field=models.TextField(blank=True, default=None, help_text='You can add notes about this configuration here if you want', null=True),
+            model_name="fleetcomm",
+            name="notes",
+            field=models.TextField(
+                blank=True,
+                default=None,
+                help_text="You can add notes about this configuration here if you want",
+                null=True,
+            ),
         ),
         migrations.AlterField(
-            model_name='fleetdoctrine',
-            name='notes',
-            field=models.TextField(blank=True, default=None, help_text='You can add notes about this configuration here if you want', null=True),
+            model_name="fleetdoctrine",
+            name="notes",
+            field=models.TextField(
+                blank=True,
+                default=None,
+                help_text="You can add notes about this configuration here if you want",
+                null=True,
+            ),
         ),
         migrations.AlterField(
-            model_name='formuplocation',
-            name='notes',
-            field=models.TextField(blank=True, default=None, help_text='You can add notes about this configuration here if you want', null=True),
+            model_name="formuplocation",
+            name="notes",
+            field=models.TextField(
+                blank=True,
+                default=None,
+                help_text="You can add notes about this configuration here if you want",
+                null=True,
+            ),
         ),
     ]

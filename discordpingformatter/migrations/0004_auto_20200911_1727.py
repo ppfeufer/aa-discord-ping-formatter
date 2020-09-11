@@ -6,12 +6,16 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('discordpingformatter', '0003_webhook'),
+        ("discordpingformatter", "0003_webhook"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='fleetcomm',
-            options={'default_permissions': (), 'verbose_name': 'Fleet Comm', 'verbose_name_plural': 'Fleet Comms'},
+            name="fleetcomm",
+            options={
+                "default_permissions": (),
+                "verbose_name": "Fleet Comm",
+                "verbose_name_plural": "Fleet Comms",
+            },
         ),
     ]
