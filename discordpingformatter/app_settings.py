@@ -1,6 +1,13 @@
 from django.conf import settings
 
+from .utils import clean_setting
+
 import re
+
+# set default panels if none are set in local.py
+AA_FLEETPINGFORMATTER_USE_SLACK = clean_setting(
+    "AA_FLEETPINGFORMATTER_USE_SLACK", False
+)
 
 
 def get_site_url():  # regex sso url
