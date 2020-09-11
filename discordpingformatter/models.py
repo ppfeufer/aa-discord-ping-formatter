@@ -122,7 +122,6 @@ class DiscordPingTargets(models.Model):
     )
     restricted_to_group = models.ManyToManyField(
         Group,
-        blank=True,
         related_name="discord_role_require_groups",
         help_text=(
             "Restrict the right to ping this Discord group to one or more groups."
@@ -227,7 +226,6 @@ class Webhook(models.Model):
     )
     restricted_to_group = models.ManyToManyField(
         Group,
-        blank=True,
         related_name="webhook_require_groups",
         help_text=("Restrict ping right to this webhook to one or more groups."),
     )
