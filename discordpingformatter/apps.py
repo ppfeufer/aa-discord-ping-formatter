@@ -6,4 +6,4 @@ from . import __version__
 class AaDiscordPingFormatterConfig(AppConfig):
     name = "discordpingformatter"
     label = "discordpingformatter"
-    verbose_name = "AA Discord Ping Formatter v{}".format(__version__)
+    verbose_name = "AA Fleet Ping Formatter v{}".format(__version__)
