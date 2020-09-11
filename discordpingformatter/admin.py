@@ -54,6 +54,7 @@ class WebhookAdmin(admin.ModelAdmin):
         "type",
         "url",
         "notes",
+        "is_embedded",
         "is_enabled",
     )
     list_filter = ("is_enabled",)

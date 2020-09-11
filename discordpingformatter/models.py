@@ -144,7 +144,7 @@ class DiscordPingTargets(models.Model):
         return self.name
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}(id={self.id}, discord_id='{self.discord_id}', restricted_to_group='{self.restricted_to_group}', name='{self.name}')"
+        return f"{self.__class__.__name__}(id={self.id}, discord_id='{self.discord_id}', restricted_to_group='{self.restricted_to_group.all()}', name='{self.name}')"
 
     class Meta:
         verbose_name = "Discord Ping Target"
@@ -220,6 +220,11 @@ class Webhook(models.Model):
             "https://discordapp.com/api/webhooks/123456/abcdef"
         ),
     )
+    is_embedded = models.BooleanField(
+        default=True,
+        db_index=True,
+        help_text="Whether this webhook's ping is embedded or not",
+    )
     restricted_to_group = models.ManyToManyField(
         Group,
         blank=True,
@@ -242,7 +247,7 @@ class Webhook(models.Model):
         return self.name
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}(id={self.id}, name='{self.name}')"
+        return f"{self.__class__.__name__}(id={self.id}, type='{self.type}', url='{self.url}', restricted_to_group='{self.restricted_to_group.all()}', name='{self.name}', is_embedded='{self.is_embedded}')"
 
     class Meta:
         verbose_name = "Webhook"
