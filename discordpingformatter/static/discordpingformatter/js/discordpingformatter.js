@@ -121,6 +121,16 @@ jQuery(document).ready(function($) {
         request.send(JSON.stringify(params));
     });
 
+    var sendSlackPing = (function(slackWebhook, payload) {
+        $.ajax({
+            data: 'payload=' + JSON.stringify(payload),
+            dataType: 'json',
+            processData: false,
+            type: 'POST',
+            url: slackWebhook
+        });
+    });
+
     /**
      * convert hex color code in something Discord can handle
      *
@@ -150,7 +160,9 @@ jQuery(document).ready(function($) {
         var pingTarget = sanitizeInput($('select#pingTarget option:selected').val());
         var pingTargetText = sanitizeInput($('select#pingTarget option:selected').text());
         var fleetType = sanitizeInput($('select#fleetType option:selected').val());
+        var webhookType = sanitizeInput($('select#pingChannel option:selected').data('webhook-type'));
         var webhookEmbedColor = sanitizeInput($('select#fleetType option:selected').data('embed-color'));
+        var webhookEmbedPing = sanitizeInput($('select#pingChannel option:selected').data('webhook-embed'));
         var fcName = sanitizeInput($('input#fcName').val());
         var fleetName = sanitizeInput($('input#fleetName').val());
         var formupLocation = sanitizeInput($('input#formupLocation').val());
@@ -159,6 +171,10 @@ jQuery(document).ready(function($) {
         var fleetDoctrine = sanitizeInput($('input#fleetDoctrine').val());
         var fleetSrp = sanitizeInput($('select#fleetSrp option:selected').val());
         var additionalInformation = sanitizeInput($('textarea#additionalInformation').val());
+
+        console.log(webhookEmbedColor);
+        console.log(webhookType);
+        console.log(webhookEmbedPing);
 
         // ping webhooks, if configured
         var discordWebhook = false;
@@ -250,7 +266,13 @@ jQuery(document).ready(function($) {
                     var timezonesUrl = getTimezonesUrl(formupTime);
 
                     discordPingText += ' - ' + timezonesUrl;
-                    discordWebhookPingTextContent += ' ([Time Zone Conversion](' + timezonesUrl + '))';
+                    if(webhookType === 'Discord') {
+                        discordWebhookPingTextContent += ' ([Time Zone Conversion](' + timezonesUrl + '))';
+                    }
+
+                    if(webhookType === 'Slack') {
+                        discordWebhookPingTextContent += ' (<' + timezonesUrl + '|Time Zone Conversion>)';
+                    }
                 }
             }
         }
@@ -279,7 +301,13 @@ jQuery(document).ready(function($) {
             discordWebhookPingTextContent += "\n\n" + '**Additional Information**:' + "\n" + additionalInformation;
         }
 
-        $('.aa-discord-ping-formatter-ping-text').html('<p>' + nl2br(discordPingTarget + discordPingText) + '</p>');
+        if(discordPingformatterSettings.platformUsed === 'Discord') {
+            $('.aa-discord-ping-formatter-ping-text').html('<p>' + nl2br(discordPingTarget + discordPingText) + '</p>');
+        }
+
+        if(discordPingformatterSettings.platformUsed === 'Slack') {
+            $('.aa-discord-ping-formatter-ping-text').html('<p>' + nl2br(discordPingTarget + discordPingText.split('**').join('*')) + '</p>');
+        }
 
         // ping it directly if a webhook is selected
         if(discordWebhook !== false && discordWebhook !== '') {
@@ -289,39 +317,62 @@ jQuery(document).ready(function($) {
                 discordWebhookPingTextFooter = '(Ping sent by: ' + discordPingformatterSettings.pingCreator + ')';
             }
 
+            var embedColor = '#FAA61A';
+
+            if(fleetType !== '' && embedColor !== '') {
+                embedColor = webhookEmbedColor;
+            }
+
+            // add fcName if we have one
+            if(fcName !== '') {
+                discordWebhookPingTextHeader += ' under ' + fcName;
+            }
+
+            var copyPasteText = '';
+
             // send the ping
-            if(discordPingformatterSettings.embedPing === true) {
-                var embedColor = '#FAA61A';
+            if(webhookType === 'Discord') {
+                if(undefined !== webhookEmbedPing && webhookEmbedPing === 'True') {
 
-                if(fleetType !== '' && embedColor !== '') {
-                    embedColor = webhookEmbedColor;
-                }
-
-                // add fcName if we have one
-                if(fcName !== '') {
-                    discordWebhookPingTextHeader += ' under ' + fcName;
-                }
-
-                sendEmbeddedDiscordPing(
-                    discordWebhook,
-                    webhookPingTarget + ' :: **' + discordWebhookPingTextHeader + '**' + "\n" + '** **',
-                    // embedded content » https://discohook.org/ - https://leovoel.github.io/embed-visualizer/
-                    {
-                        'title': '**.: Fleet Details :.**',
-                        'description': discordWebhookPingTextContent,
-                        'color': hexToDecimal(embedColor),
-                        'footer': {
-                            'text': discordWebhookPingTextFooter
+                    sendEmbeddedDiscordPing(
+                        discordWebhook,
+                        webhookPingTarget + ' :: **' + discordWebhookPingTextHeader + '**' + "\n" + '** **',
+                        // embedded content » https://discohook.org/ - https://leovoel.github.io/embed-visualizer/
+                        {
+                            'title': '**.: Fleet Details :.**',
+                            'description': discordWebhookPingTextContent,
+                            'color': hexToDecimal(embedColor),
+                            'footer': {
+                                'text': discordWebhookPingTextFooter
+                            }
                         }
-                    }
-                );
-            } else {
-                sendDiscordPing(discordWebhook, webhookPingTarget + discordPingText);
+                    );
+                } else {
+                    sendDiscordPing(discordWebhook, webhookPingTarget + discordPingText);
+                }
+            }
+
+            if(webhookType === 'Slack') {
+                var slackEmbedPingTarget = webhookPingTarget.replace('@', '!');
+                var payload = {
+                    'attachments': [
+                        {
+                            'fallback': discordPingText,
+                            'color': embedColor,
+                            'pretext': '<' + slackEmbedPingTarget + '>' + ' :: *' + discordWebhookPingTextHeader + '*',
+                            'text': '*.: Fleet Details :.*' + "\n" + discordWebhookPingTextContent.split('**').join('*'),
+                            'footer': discordWebhookPingTextFooter,
+//                            'footer_icon': 'https://platform.slack-edge.com/img/default_application_icon.png'
+                        }
+                    ]
+                };
+
+                sendSlackPing(discordWebhook, payload);
             }
 
             // tell the FC that it's already pinged
             showSuccess(
-                'Success, your ping has been sent to your Discord.',
+                'Success, your ping has been sent to your ' + discordPingformatterSettings.platformUsed + '.',
                 '.aa-discord-ping-formatter-ping-copyresult'
             );
         }
@@ -345,7 +396,7 @@ jQuery(document).ready(function($) {
          */
         clipboardDiscordPingData.on('success', function(e) {
             showSuccess(
-                'Success, Ping copied to clipboard. Now be a good FC and throw it in your Discord so you actually get some people in fleet.',
+                'Success, Ping copied to clipboard. Now be a good FC and throw it in your ' + discordPingformatterSettings.platformUsed + ' so you actually get some people in fleet.',
                 '.aa-discord-ping-formatter-ping-copyresult'
             );
 

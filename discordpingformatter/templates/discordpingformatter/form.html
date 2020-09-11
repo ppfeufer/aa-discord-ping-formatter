@@ -38,13 +38,14 @@
     <div class="form-group clearfix">
         <label class="col-md-3 control-label" for="createPingText"></label>
         <div class="col-md-4">
-            <button id="createPingText" name="createPingText" class="btn btn-primary">Create Discord Ping Text</button>
+            <button id="createPingText" name="createPingText" class="btn btn-primary">Submit</button>
         </div>
     </div>
 </fieldset>
 
-<script type="text/javascript">
+<script type="application/javascript">
     var discordPingformatterSettings = {
+        platformUsed: {% if useSlack|yesno:"true,false" %}'Slack'{% else %}'Discoed{% endif %},
         timezonesInstalled: {{ timezones_installed|yesno:"true,false" }},
         siteUrl: '{{ site_url }}/',
         pingCreator: '{{ mainCharacter|safe|addslashes }}'
