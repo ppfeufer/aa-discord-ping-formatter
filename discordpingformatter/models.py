@@ -163,7 +163,7 @@ class FleetType(models.Model):
     )
     embed_color = models.CharField(
         max_length=7,
-        unique=True,
+        blank=True,
         help_text="Hightlight color for the embed",
     )
     notes = models.TextField(
