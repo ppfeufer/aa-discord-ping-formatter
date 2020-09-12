@@ -153,7 +153,7 @@ class DiscordPingTargets(models.Model):
         if not discord_group_info:
             raise ValidationError("This group has not been synched to Discord yet.")
 
-        super(DiscordPingTargets, self).clean(*args, **kwargs)
+        super().clean(*args, **kwargs)
 
     def save(self, *args, **kwargs):
         """
