@@ -1,4 +1,7 @@
+from allianceauth.services.modules.discord.models import DiscordUser
+
 from django.contrib.auth.models import Group
+from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -110,22 +113,22 @@ class FormupLocation(models.Model):
 class DiscordPingTargets(models.Model):
     """Discord Ping Targets"""
 
-    name = models.CharField(
-        max_length=255,
+    name = models.OneToOneField(
+        Group,
+        on_delete=models.CASCADE,
         unique=True,
         help_text="Name of the Discord role to ping",
     )
     discord_id = models.CharField(
         max_length=255,
         unique=True,
+        blank=True,
         help_text="ID of the Discord role to ping",
     )
     restricted_to_group = models.ManyToManyField(
         Group,
         related_name="discord_role_require_groups",
-        help_text=(
-            "Restrict the right to ping this Discord group to one or more groups."
-        ),
+        help_text=("Restrict Discord group to the following group(s) ..."),
     )
     notes = models.TextField(
         null=True,
@@ -139,8 +142,31 @@ class DiscordPingTargets(models.Model):
         help_text="Whether this formup location is enabled or not",
     )
 
+    def clean(self, *args, **kwargs):
+        """
+        check if the group has already been synched to Discord
+        :param args:
+        :param kwargs:
+        """
+        discord_group_info = DiscordUser.objects.group_to_role(self.name)
+
+        if not discord_group_info:
+            raise ValidationError("This group has not been synched to Discord yet.")
+
+        super(DiscordPingTargets, self).clean(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        """
+        Save everything
+        :param args:
+        :param kwargs:
+        """
+        discord_group_info = DiscordUser.objects.group_to_role(self.name)
+        self.discord_id = discord_group_info["id"]
+        super().save(*args, **kwargs)  # Call the "real" save() method.
+
     def __str__(self) -> str:
-        return self.name
+        return str(self.name)
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}(id={self.id}, discord_id='{self.discord_id}', restricted_to_group='{self.restricted_to_group.all()}', name='{self.name}')"
@@ -216,7 +242,7 @@ class Webhook(models.Model):
         unique=True,
         help_text=(
             "URL of this webhook, e.g. "
-            "https://discordapp.com/api/webhooks/123456/abcdef"
+            "https://discordapp.com/api/webhooks/123456/abcdef or https://hooks.slack.com/services/xxxx/xxxx"
         ),
     )
     is_embedded = models.BooleanField(
@@ -227,7 +253,7 @@ class Webhook(models.Model):
     restricted_to_group = models.ManyToManyField(
         Group,
         related_name="webhook_require_groups",
-        help_text=("Restrict ping right to this webhook to one or more groups."),
+        help_text=("Restrict this webhook to the following group(s) ..."),
     )
     notes = models.TextField(
         null=True,

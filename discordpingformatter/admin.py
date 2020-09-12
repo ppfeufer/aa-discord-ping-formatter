@@ -37,6 +37,7 @@ class DiscordPingTargetsAdmin(admin.ModelAdmin):
     list_filter = ("is_enabled",)
     ordering = ("name",)
     filter_horizontal = ("restricted_to_group",)
+    readonly_fields = ("discord_id",)
 
 
 @admin.register(FleetType)
