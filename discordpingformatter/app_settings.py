@@ -5,28 +5,16 @@ from .utils import clean_setting
 import re
 
 # set default panels if none are set in local.py
-AA_DISCORDFORMATTER_ADDITIONAL_PING_TARGETS = clean_setting(
-    "AA_DISCORDFORMATTER_ADDITIONAL_PING_TARGETS", []
-)
-AA_DISCORDFORMATTER_ADDITIONAL_FLEET_TYPES = clean_setting(
-    "AA_DISCORDFORMATTER_ADDITIONAL_FLEET_TYPES", []
-)
-AA_DISCORDFORMATTER_ADDITIONAL_PING_WEBHOOKS = clean_setting(
-    "AA_DISCORDFORMATTER_ADDITIONAL_PING_WEBHOOKS", []
-)
-AA_DISCORDFORMATTER_WEBHOOK_EMBED_PING = clean_setting(
-    "AA_DISCORDFORMATTER_WEBHOOK_EMBED_PING", False
-)
-AA_DISCORDFORMATTER_FLEET_COMMS = clean_setting("AA_DISCORDFORMATTER_FLEET_COMMS", [])
-AA_DISCORDFORMATTER_FLEET_DOCTRINES = clean_setting(
-    "AA_DISCORDFORMATTER_FLEET_DOCTRINES", []
-)
-AA_DISCORDFORMATTER_FLEET_FORMUP_LOCATIONS = clean_setting(
-    "AA_DISCORDFORMATTER_FLEET_FORMUP_LOCATIONS", []
+AA_FLEETPINGFORMATTER_USE_SLACK = clean_setting(
+    "AA_FLEETPINGFORMATTER_USE_SLACK", False
 )
 
 
 def get_site_url():  # regex sso url
+    """
+    get the site url
+    :return: string
+    """
     regex = r"^(.+)\/s.+"
     matches = re.finditer(regex, settings.ESI_SSO_CALLBACK_URL, re.MULTILINE)
     url = "http://"

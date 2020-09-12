@@ -12,10 +12,10 @@
                 <option value="" disabled></option>
                 <optgroup label="Additionally configured fleet types">
                     {% for fleetType in additionalFleetTypes %}
-                        {% if fleetType.fleetType %}
-                            <option value="{{ fleetType.fleetType }}" data-embed-color="{{ fleetType.embedColor }}">{{ fleetType.fleetType }}</option>
+                        {% if fleetType.embed_color %}
+                            <option value="{{ fleetType.name }}" data-embed-color="{{ fleetType.embed_color }}">{{ fleetType.name }}</option>
                         {% else %}
-                            <option value="{{ fleetType }}" data-embed-color="#FAA61A">{{ fleetType }}</option>
+                            <option value="{{ fleetType.name }}" data-embed-color="#FAA61A">{{ fleetType.name }}</option>
                         {% endif %}
                     {% endfor %}
                 </optgroup>
