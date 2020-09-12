@@ -1,5 +1,12 @@
 # AA Discord Ping Formatter
 
+[![Version](https://img.shields.io/pypi/v/aa-discord-ping-formatter?label=release)](https://pypi.org/project/aa-discord-ping-formatter/)
+[![License](https://img.shields.io/badge/license-GPLv3-green)](https://pypi.org/project/aa-discord-ping-formatter/)
+[![Python](https://img.shields.io/pypi/pyversions/aa-discord-ping-formatter)](https://pypi.org/project/aa-discord-ping-formatter/)
+[![Django](https://img.shields.io/pypi/djversions/aa-discord-ping-formatter?label=django)](https://pypi.org/project/aa-discord-ping-formatter/)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/aa-discord-ping-formatter)](https://pypi.org/project/aa-discord-ping-formatter/)
+[![Code Style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](http://black.readthedocs.io/en/latest/)
+
 App for formatting pings for Discord in Alliance Auth
 
 ## Contents

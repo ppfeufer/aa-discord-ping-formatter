@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.0a2] - 2020-09-12
+### Changed
+- Groups for PingTargets can now be selected via drop down in admin and the respective Discord group_id is assigned automatically. **!! IMPORTANT !!** In case you already defined PingTargets in v2.0.0a1, you have to remove them before migrating.
+
 ## [2.0.0a1] - 2020-09-12
 ### Added
 - Support for pings to Slack. If you're using Slack, add ``AA_FLEETPINGFORMATTER_USE_SLACK = True`` to your `local.py`
