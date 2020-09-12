@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [2.0.0] - 2020-09-13
+## [2.0.0] - 
 ### Added
 - Support for pings to Slack. If you're using Slack, add ``AA_FLEETPINGFORMATTER_USE_SLACK = True`` to your `local.py`
 
