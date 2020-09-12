@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.0] - 2020-09-13
+### Added
+- Support for pings to Slack. If you're using Slack, add ``AA_FLEETPINGFORMATTER_USE_SLACK = True`` to your `local.py`
+
+### Changed
+- **!! breaking change !!** Settings are no longer in your `local.py`. You find them now in your admin backend. Which means. after updating to this version, you _have_ to re-do you setting in the admin backend of Auth. 
+
 ## [1.1.4] - 2020-08-14
 ### Fixed
 - Little logic error in embedded prepings when no FC is set
