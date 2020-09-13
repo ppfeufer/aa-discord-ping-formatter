@@ -5,10 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.0a4] - 2020-09-13
+### Changed
+- Minimum AA version set to 2.7.4 since we use a feature that was introduced in this version. So make sure to update your Alliance Auth before testing this app.
+
 ## [2.0.0a3] - 2020-09-13
 ### Fixed
-- using Python 3 style `super()` without arguments
-- import order
+- Using Python 3 style `super()` without arguments
+- Import order
 
 ### Removed
 - template tags since they are no longer needed
