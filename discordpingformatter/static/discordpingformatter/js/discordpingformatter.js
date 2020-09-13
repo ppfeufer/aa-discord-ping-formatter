@@ -1,4 +1,4 @@
-/* global discordPingformatterSettings */
+/* global discordPingformatterSettings, fleetPingToolTranslations */
 
 jQuery(document).ready(function($) {
     /* Functions
@@ -372,7 +372,7 @@ jQuery(document).ready(function($) {
 
             // tell the FC that it's already pinged
             showSuccess(
-                'Success, your ping has been sent to your ' + discordPingformatterSettings.platformUsed + '.',
+                fleetPingToolTranslations.ping.success,
                 '.aa-discord-ping-formatter-ping-copyresult'
             );
         }
@@ -396,7 +396,8 @@ jQuery(document).ready(function($) {
          */
         clipboardDiscordPingData.on('success', function(e) {
             showSuccess(
-                'Success, Ping copied to clipboard. Now be a good FC and throw it in your ' + discordPingformatterSettings.platformUsed + ' so you actually get some people in fleet.',
+//                'Success, Ping copied to clipboard. Now be a good FC and throw it in your ' + discordPingformatterSettings.platformUsed + ' so you actually get some people in fleet.',
+                fleetPingToolTranslations.copyToClipboard.success,
                 '.aa-discord-ping-formatter-ping-copyresult'
             );
 
@@ -409,7 +410,8 @@ jQuery(document).ready(function($) {
          */
         clipboardDiscordPingData.on('error', function() {
             showError(
-                'Error, Ping not copied to clipboard.',
+//                'Error, Ping not copied to clipboard.',
+                fleetPingToolTranslations.copyToClipboard.error,
                 '.aa-discord-ping-formatter-ping-copyresult'
             );
 
