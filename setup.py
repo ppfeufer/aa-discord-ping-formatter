@@ -25,7 +25,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     license="GNU General Public License v3 (GPLv3)",
-    description="Discord Ping Formatter for Alliance Auth",
+    description="Fleet Ping Formatter for Alliance Auth supporting pings via webhooks to Discord and Slack",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/ppfeufer/aa-discord-ping-formatter",
