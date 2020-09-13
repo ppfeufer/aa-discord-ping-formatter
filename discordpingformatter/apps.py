@@ -16,4 +16,4 @@ class AaDiscordPingFormatterConfig(AppConfig):
 
     name = "discordpingformatter"
     label = "discordpingformatter"
-    verbose_name = "Fleet Ping Formatter v{}".format(__version__)
+    verbose_name = "Fleet Ping Tool v{}".format(__version__)
