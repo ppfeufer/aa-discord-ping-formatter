@@ -52,4 +52,4 @@ def register_urls():
     register our basu url
     :return:
     """
-    return UrlHook(urls, "discordpingformatter", r"^fleetpingformatter/")
+    return UrlHook(urls, "discordpingformatter", r"^fleetpings/")
