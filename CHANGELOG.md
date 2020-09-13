@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.0a3] - 2020-09-13
+### Fixed
+- using Python 3 style `super()` without arguments
+- import order
+
+### Removed
+- template tags since they are no longer needed
+
 ## [2.0.0a2] - 2020-09-12
 ### Changed
 - Groups for PingTargets can now be selected via drop down in admin and the respective Discord group_id is assigned automatically. **!! IMPORTANT !!** In case you already defined PingTargets in v2.0.0a1, you have to remove them before migrating.
