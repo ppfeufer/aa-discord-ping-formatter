@@ -7,7 +7,7 @@
 [![PyPI Downloads](https://img.shields.io/pypi/dm/aa-discord-ping-formatter)](https://pypi.org/project/aa-discord-ping-formatter/)
 [![Code Style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](http://black.readthedocs.io/en/latest/)
 
-App for formatting pings for Discord in Alliance Auth
+App for formatting pings for Discord and Slack in Alliance Auth
 
 Formerly known as "AA Discord Ping Formatter", which is why this name still appears in some places 
 (especially as the django app name,  permissions and database tables), please don't be confused by it. 
