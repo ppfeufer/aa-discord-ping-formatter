@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+
+"""
+settings for the admin backend
+"""
+
 from discordpingformatter.models import (
     FleetComm,
     Webhook,
@@ -12,6 +18,10 @@ from django.contrib import admin
 
 @admin.register(FleetComm)
 class FleetCommAdmin(admin.ModelAdmin):
+    """
+    FleetCommAdmin
+    """
+
     list_display = ("name", "notes", "is_enabled")
     list_filter = ("is_enabled",)
     ordering = ("name",)
@@ -19,6 +29,10 @@ class FleetCommAdmin(admin.ModelAdmin):
 
 @admin.register(FleetDoctrine)
 class FleetDoctrineAdmin(admin.ModelAdmin):
+    """
+    FleetDoctrineAdmin
+    """
+
     list_display = ("name", "notes", "is_enabled")
     list_filter = ("is_enabled",)
     ordering = ("name",)
@@ -26,6 +40,10 @@ class FleetDoctrineAdmin(admin.ModelAdmin):
 
 @admin.register(FormupLocation)
 class FormupLocationAdmin(admin.ModelAdmin):
+    """
+    FormupLocationAdmin
+    """
+
     list_display = ("name", "notes", "is_enabled")
     list_filter = ("is_enabled",)
     ordering = ("name",)
@@ -33,6 +51,10 @@ class FormupLocationAdmin(admin.ModelAdmin):
 
 @admin.register(DiscordPingTargets)
 class DiscordPingTargetsAdmin(admin.ModelAdmin):
+    """
+    DiscordPingTargetsAdmin
+    """
+
     list_display = ("name", "discord_id", "notes", "is_enabled")
     list_filter = ("is_enabled",)
     ordering = ("name",)
@@ -42,6 +64,10 @@ class DiscordPingTargetsAdmin(admin.ModelAdmin):
 
 @admin.register(FleetType)
 class FleetTypeAdmin(admin.ModelAdmin):
+    """
+    FleetTypeAdmin
+    """
+
     list_display = ("name", "embed_color", "notes", "is_enabled")
     list_filter = ("is_enabled",)
     ordering = ("name",)
@@ -49,6 +75,10 @@ class FleetTypeAdmin(admin.ModelAdmin):
 
 @admin.register(Webhook)
 class WebhookAdmin(admin.ModelAdmin):
+    """
+    WebhookAdmin
+    """
+
     list_display = (
         "id",
         "name",

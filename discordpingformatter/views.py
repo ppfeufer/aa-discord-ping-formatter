@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+
+"""
+the views
+"""
+
 from discordpingformatter.models import (
     FleetComm,
     DiscordPingTargets,

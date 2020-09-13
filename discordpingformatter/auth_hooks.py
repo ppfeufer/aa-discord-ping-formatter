@@ -1,7 +1,13 @@
-from allianceauth.services.hooks import MenuItemHook, UrlHook
-from allianceauth import hooks
+# -*- coding: utf-8 -*-
+
+"""
+hook into AA
+"""
 
 from django.utils.translation import ugettext_lazy as _
+
+from allianceauth.services.hooks import MenuItemHook, UrlHook
+from allianceauth import hooks
 
 from . import urls, __title__
 
@@ -20,16 +26,30 @@ class AaDiscordPingFormatterMenuItem(MenuItemHook):
         )
 
     def render(self, request):
+        """
+        check if the user has the permission to view this app
+        :param request:
+        :return:
+        """
         if request.user.has_perm("discordpingformatter.basic_access"):
             return MenuItemHook.render(self, request)
+
         return ""
 
 
 @hooks.register("menu_item_hook")
 def register_menu():
+    """
+    register our menu item
+    :return:
+    """
     return AaDiscordPingFormatterMenuItem()
 
 
 @hooks.register("url_hook")
 def register_urls():
-    return UrlHook(urls, "discordpingformatter", r"^discordpingformatter/")
+    """
+    register our basu url
+    :return:
+    """
+    return UrlHook(urls, "discordpingformatter", r"^fleetpingformatter/")
