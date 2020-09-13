@@ -172,10 +172,6 @@ jQuery(document).ready(function($) {
         var fleetSrp = sanitizeInput($('select#fleetSrp option:selected').val());
         var additionalInformation = sanitizeInput($('textarea#additionalInformation').val());
 
-        console.log(webhookEmbedColor);
-        console.log(webhookType);
-        console.log(webhookEmbedPing);
-
         // ping webhooks, if configured
         var discordWebhook = false;
 
@@ -317,6 +313,7 @@ jQuery(document).ready(function($) {
                 discordWebhookPingTextFooter = '(Ping sent by: ' + discordPingformatterSettings.pingCreator + ')';
             }
 
+            // default embed color
             var embedColor = '#FAA61A';
 
             if(fleetType !== '' && embedColor !== '') {
@@ -330,7 +327,7 @@ jQuery(document).ready(function($) {
 
             var copyPasteText = '';
 
-            // send the ping
+            // send the ping to Discord
             if(webhookType === 'Discord') {
                 if(undefined !== webhookEmbedPing && webhookEmbedPing === 'True') {
 
@@ -352,6 +349,7 @@ jQuery(document).ready(function($) {
                 }
             }
 
+            // send the ping to Discord
             if(webhookType === 'Slack') {
                 var slackEmbedPingTarget = webhookPingTarget.replace('@', '!');
                 var payload = {
@@ -396,7 +394,6 @@ jQuery(document).ready(function($) {
          */
         clipboardDiscordPingData.on('success', function(e) {
             showSuccess(
-//                'Success, Ping copied to clipboard. Now be a good FC and throw it in your ' + discordPingformatterSettings.platformUsed + ' so you actually get some people in fleet.',
                 fleetPingToolTranslations.copyToClipboard.success,
                 '.aa-discord-ping-formatter-ping-copyresult'
             );
@@ -410,7 +407,6 @@ jQuery(document).ready(function($) {
          */
         clipboardDiscordPingData.on('error', function() {
             showError(
-//                'Error, Ping not copied to clipboard.',
                 fleetPingToolTranslations.copyToClipboard.error,
                 '.aa-discord-ping-formatter-ping-copyresult'
             );
