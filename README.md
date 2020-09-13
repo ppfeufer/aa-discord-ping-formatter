@@ -1,4 +1,4 @@
-# AA Discord Ping Formatter
+# AA Fleet Ping Tool
 
 [![Version](https://img.shields.io/pypi/v/aa-discord-ping-formatter?label=release)](https://pypi.org/project/aa-discord-ping-formatter/)
 [![License](https://img.shields.io/badge/license-GPLv3-green)](https://pypi.org/project/aa-discord-ping-formatter/)
@@ -8,6 +8,11 @@
 [![Code Style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](http://black.readthedocs.io/en/latest/)
 
 App for formatting pings for Discord in Alliance Auth
+
+Formerly known as "AA Discord Ping Formatter", which is why this name still appears in some places 
+(especially as the django app name,  permissions and database tables), please don't be confused by it. 
+This module was undergoing some changes which made me change the module's public name to "AA Fleet Ping Tool". 
+That's'S the whole reason behind it.
 
 ## Contents
 
@@ -19,11 +24,14 @@ App for formatting pings for Discord in Alliance Auth
 
 ## Installation
 
-**Important**: This app is a plugin for Alliance Auth. If you don't have Alliance Auth running already, please install it first before proceeding. (see the official [AA installation guide](https://allianceauth.readthedocs.io/en/latest/installation/allianceauth.html) for details)
+**Important**: This app is a plugin for Alliance Auth. If you don't have Alliance Auth running already, 
+please install it first before proceeding. 
+(see the official [AA installation guide](https://allianceauth.readthedocs.io/en/latest/installation/allianceauth.html) for details)
 
 ### Step 1 - Install app
 
-Make sure you are in the virtual environment (venv) of your Alliance Auth installation. Then install the latest version:
+Make sure you are in the virtual environment (venv) of your Alliance Auth installation. 
+Then install the latest version:
 
 ```bash
 pip install aa-discord-ping-formatter
@@ -52,7 +60,9 @@ Restart your supervisor services for AA
 
 ### Step 4 - Setup permissions
 
-Now you can setup permissions in Alliance Auth for your users. Add ``discordpingformatter | aa discord ping formatter | Can access this app`` to the states and/or groups you would like to have access.
+Now you can setup permissions in Alliance Auth for your users. 
+Add ``discordpingformatter | aa discord ping formatter | Can access this app`` to the states and/or 
+groups you would like to have access.
 
 ## Updating
 
@@ -90,11 +100,13 @@ _(Example for embedded ping (top) and non embedded ping (bottom))_
 
 ### Using Slack instead of Discord?
 
-Don't worrie, I don't judge and you still can use this module. It supports also pings to Slack. Simply add the following to your `local.py`. 
+Don't worrie, I don't judge and you still can use this module. It supports also pings to Slack. 
+Simply add the following to your `local.py`. 
 
 ```python
 ## AA Fleet Ping Formatter
 AA_FLEETPINGFORMATTER_USE_SLACK = True
 ```
 
-Although you cannot use your Auth groups as targets for pings with Slack.
+Although you cannot use your Auth groups as targets for pings with Slack. Auth doesn't supprt Slack as of yet. 
+(Maybe if someone writes a service?)
