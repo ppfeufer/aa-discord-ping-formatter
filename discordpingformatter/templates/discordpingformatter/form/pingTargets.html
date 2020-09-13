@@ -1,5 +1,7 @@
+{% load i18n %}
+
 <div class="form-group clearfix">
-    <label class="col-md-3 control-label" for="pingTarget">Ping Target</label>
+    <label class="col-md-3 control-label" for="pingTarget">{% trans "Ping Target" %}</label>
     <div class="col-md-9">
         <select id="pingTarget" name="pingTarget" class="form-control">
             {% if useSlack %}
@@ -12,7 +14,7 @@
 
             {% if additionalPingTargets|length > 0 and useSlack == False %}
                 <option value="" disabled></option>
-                <optgroup label="Additionally configured ping targets">
+                <optgroup label="{% trans 'Additionally configured ping targets' %}">
                     {% for pingTarget in additionalPingTargets %}
                         <option value="{{ pingTarget.discord_id }}">@{{ pingTarget.name }}</option>
                     {% endfor %}

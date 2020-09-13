@@ -1,0 +1,191 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-13 23:10+0200\n"
+"PO-Revision-Date: 2020-09-13 23:11+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.2.4\n"
+
+#: discordpingformatter/templates/discordpingformatter/base.html:5
+#: discordpingformatter/templates/discordpingformatter/base.html:9
+msgid "Fleet Ping Tool"
+msgstr "Flotten Ping Tool"
+
+#: discordpingformatter/templates/discordpingformatter/form.html:43
+msgid "Create Ping"
+msgstr "Ping erstellen"
+
+#: discordpingformatter/templates/discordpingformatter/form/additionalInformation.html:4
+msgid "Additional Information"
+msgstr "Zusätzliche Informationen"
+
+#: discordpingformatter/templates/discordpingformatter/form/fleetCommander.html:4
+msgid "FC Name"
+msgstr "FC Name"
+
+#: discordpingformatter/templates/discordpingformatter/form/fleetComms.html:4
+msgid "Fleet Comms"
+msgstr "Flotten Comms"
+
+#: discordpingformatter/templates/discordpingformatter/form/fleetDoctrine.html:4
+msgid "Ships / Doctrine"
+msgstr "Schiffe / Doktrin"
+
+#: discordpingformatter/templates/discordpingformatter/form/fleetName.html:4
+msgid "Fleet Name"
+msgstr "Flotten Name"
+
+#: discordpingformatter/templates/discordpingformatter/form/fleetType.html:4
+msgid "Fleet Type"
+msgstr "Flotten Art"
+
+#: discordpingformatter/templates/discordpingformatter/form/fleetType.html:7
+#: discordpingformatter/templates/discordpingformatter/form/srp.html:7
+msgid "Please select"
+msgstr "Bitte wählen"
+
+#: discordpingformatter/templates/discordpingformatter/form/fleetType.html:8
+msgid "Roaming Fleet"
+msgstr "Roaming Flotte"
+
+#: discordpingformatter/templates/discordpingformatter/form/fleetType.html:9
+msgid "Home Defense"
+msgstr "Heimatverteidigung"
+
+#: discordpingformatter/templates/discordpingformatter/form/fleetType.html:10
+msgid "StratOP"
+msgstr "Strategische Operation"
+
+#: discordpingformatter/templates/discordpingformatter/form/fleetType.html:11
+msgid "CTA"
+msgstr "CTA"
+
+#: discordpingformatter/templates/discordpingformatter/form/fleetType.html:15
+msgid "Additionally configured fleet types"
+msgstr "Zusätzlich konfigurierte Flotten Arten"
+
+#: discordpingformatter/templates/discordpingformatter/form/formupLocation.html:4
+msgid "Formup Location"
+msgstr "Sammelpunkt"
+
+#: discordpingformatter/templates/discordpingformatter/form/formupTime.html:4
+msgid "Formup Time"
+msgstr "Startzeit"
+
+#: discordpingformatter/templates/discordpingformatter/form/formupTime.html:4
+msgid "This is Eve Time"
+msgstr "Dies ist Eve Zeit"
+
+#: discordpingformatter/templates/discordpingformatter/form/formupTime.html:7
+msgid ""
+"To enable this field, either make it a Pre-Ping (checkbox above) or uncheck "
+"&quot;Formup NOW&quot; (checkbox below)."
+msgstr ""
+"Um dieses Feld zu aktivieren muss es entweder eine Vorankündigung sein "
+"(Checkbox oben) oder deaktiviere &quot;Start JETZT&quot; (Checkbox unten)."
+
+#: discordpingformatter/templates/discordpingformatter/form/formupTime.html:9
+msgid ""
+"Timezones module is installed. Link to time zone conversion will be added "
+"automatically if you set a date and time here."
+msgstr ""
+"Zeitzonen Modul ist installiert. Links zur Zeitzonenumrechnung werden "
+"automatisch hinzugefügt, wenn Du ein Datum und Uhrzeit setzt."
+
+#: discordpingformatter/templates/discordpingformatter/form/formupTime.html:14
+msgid "Formup NOW"
+msgstr "Start JETZT"
+
+#: discordpingformatter/templates/discordpingformatter/form/formupTime.html:15
+msgid ""
+"If this checkbox is active, formup time will be set to &quot;NOW&quot; and "
+"the time in the field above (if any is set) will be ignored."
+msgstr ""
+"Wenn diese Checkbox aktiv ist, wird die Startzeit der Flotte auf &quot;"
+"JETZT&quot; gesetzt und sämtliche Angaben im obigen Feld werden ignoriert."
+
+#: discordpingformatter/templates/discordpingformatter/form/pingChannel.html:5
+msgid "Ping Channel"
+msgstr "Ping Kanal"
+
+#: discordpingformatter/templates/discordpingformatter/form/pingChannel.html:5
+msgid "Select a channel to ping it automatically"
+msgstr "Wähle einen Kanal für automatische Pings"
+
+#: discordpingformatter/templates/discordpingformatter/form/pingChannel.html:8
+msgid "None, just format it for me"
+msgstr "Keinen, einfach nur formatieren"
+
+#: discordpingformatter/templates/discordpingformatter/form/pingTargets.html:4
+msgid "Ping Target"
+msgstr "Ping Ziel"
+
+#: discordpingformatter/templates/discordpingformatter/form/pingTargets.html:17
+msgid "Additionally configured ping targets"
+msgstr "Zusätzlich konfigurierte Ping Ziele"
+
+#: discordpingformatter/templates/discordpingformatter/form/prePing.html:8
+msgid "Pre-Ping"
+msgstr "Vorankündigung"
+
+#: discordpingformatter/templates/discordpingformatter/form/srp.html:4
+msgid "SRP"
+msgstr "SRP"
+
+#: discordpingformatter/templates/discordpingformatter/form/srp.html:8
+msgid "Yes"
+msgstr "Ja"
+
+#: discordpingformatter/templates/discordpingformatter/form/srp.html:9
+msgid "No"
+msgstr "Nein"
+
+#: discordpingformatter/templates/discordpingformatter/index.html:28
+#, python-format
+msgctxt ""
+"%(usedPlatform)s is a variable that holds the current used platform. It can "
+"be either Slack or Discord. Do not translate it, just use it as it is."
+msgid "Success! Your ping has been sent to your %(usedPlatform)s."
+msgstr "Erfolg! Dein Ping wurde an Dein %(usedPlatform)s gesendet."
+
+#: discordpingformatter/templates/discordpingformatter/index.html:31
+msgid ""
+"Error! Your ping was not copied to your clipboard. Maybe your browser "
+"doesn't support this feature."
+msgstr ""
+"Fehler! Der Ping wurde nicht in Deine Zwischenablage kopiert. Vielleicht "
+"unterstützt Dein Browser diese Funktion nicht."
+
+#: discordpingformatter/templates/discordpingformatter/index.html:32
+#, python-format
+msgctxt ""
+"%(usedPlatform)s is a variable that holds the current used platform. It can "
+"be either Slack or Discord. Do not translate it, just use it as it is."
+msgid ""
+"Success! Your ping text has been copied to your clipboard. Now be a good FC "
+"and throw it in your %(usedPlatform)s so you actually get some people in "
+"fleet."
+msgstr ""
+"Erfolg! Der Ping Text wurde in Deine Zwischenablage kopiert. Nun sei ein "
+"braver FC und wirf diesen in Dein %(usedPlatform)s damit Du ein paar Leute "
+"in die Flotte bekommst."
+
+#: discordpingformatter/templates/discordpingformatter/ping.html:5
+msgid "Formatted Ping Text"
+msgstr "Formatierter Ping Text"
+
+#: discordpingformatter/templates/discordpingformatter/ping.html:13
+msgid "Copy Ping Text"
+msgstr "Ping Text kopieren"
