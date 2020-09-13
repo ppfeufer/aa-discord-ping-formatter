@@ -1,8 +1,15 @@
+# -*- coding: utf-8 -*-
+
+"""
+setting up our app
+"""
+
+import os
+
 from discordpingformatter import __version__
 
 from setuptools import find_packages, setup
 
-import os
 
 # read the contents of your README file
 this_directory = os.path.abspath(os.path.dirname(__file__))

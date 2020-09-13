@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+
+"""
+our models
+"""
+
 from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -9,6 +15,8 @@ class AaDiscordPingFormatter(models.Model):
     """Meta model for app permissions"""
 
     class Meta:
+        """AaDiscordPingFormatter :: Meta"""
+
         managed = False
         default_permissions = ()
         permissions = (("basic_access", "Can access this app"),)
@@ -34,12 +42,14 @@ class FleetComm(models.Model):
     )
 
     def __str__(self) -> str:
-        return self.name
+        return str(self.name)
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}(id={self.id}, name='{self.name}')"
 
     class Meta:
+        """FleetComm :: Meta"""
+
         verbose_name = "Fleet Comm"
         verbose_name_plural = "Fleet Comms"
         default_permissions = ()
@@ -65,12 +75,14 @@ class FleetDoctrine(models.Model):
     )
 
     def __str__(self) -> str:
-        return self.name
+        return str(self.name)
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}(id={self.id}, name='{self.name}')"
 
     class Meta:
+        """FleetDoctrine :: Meta"""
+
         verbose_name = "Fleet Doctrine"
         verbose_name_plural = "Fleet Doctrines"
         default_permissions = ()
@@ -98,12 +110,14 @@ class FormupLocation(models.Model):
     )
 
     def __str__(self) -> str:
-        return self.name
+        return str(self.name)
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}(id={self.id}, name='{self.name}')"
 
     class Meta:
+        """FormupLocation :: Meta"""
+
         verbose_name = "Formup Location"
         verbose_name_plural = "Formup Locations"
         default_permissions = ()
@@ -169,9 +183,18 @@ class DiscordPingTargets(models.Model):
         return str(self.name)
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}(id={self.id}, discord_id='{self.discord_id}', restricted_to_group='{self.restricted_to_group.all()}', name='{self.name}')"
+        return (
+            f"{self.__class__.__name__}("
+            f"id={self.id}, "
+            f"discord_id='{self.discord_id}', "
+            f"restricted_to_group='{self.restricted_to_group.all()}', "
+            f"name='{self.name}'"
+            f") "
+        )
 
     class Meta:
+        """DiscordPingTargets :: Meta"""
+
         verbose_name = "Discord Ping Target"
         verbose_name_plural = "Discord Ping Targets"
         default_permissions = ()
@@ -204,12 +227,14 @@ class FleetType(models.Model):
     )
 
     def __str__(self) -> str:
-        return self.name
+        return str(self.name)
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}(id={self.id}, name='{self.name}')"
 
     class Meta:
+        """FleetType :: Meta"""
+
         verbose_name = "Fleet Type"
         verbose_name_plural = "Fleet Types"
         default_permissions = ()
@@ -242,7 +267,8 @@ class Webhook(models.Model):
         unique=True,
         help_text=(
             "URL of this webhook, e.g. "
-            "https://discordapp.com/api/webhooks/123456/abcdef or https://hooks.slack.com/services/xxxx/xxxx"
+            "https://discordapp.com/api/webhooks/123456/abcdef "
+            "or https://hooks.slack.com/services/xxxx/xxxx"
         ),
     )
     is_embedded = models.BooleanField(
@@ -268,12 +294,23 @@ class Webhook(models.Model):
     )
 
     def __str__(self) -> str:
-        return self.name
+        return str(self.name)
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}(id={self.id}, type='{self.type}', url='{self.url}', restricted_to_group='{self.restricted_to_group.all()}', name='{self.name}', is_embedded='{self.is_embedded}')"
+        return (
+            f"{self.__class__.__name__}("
+            f"id={self.id}, "
+            f"type='{self.type}', "
+            f"url='{self.url}', "
+            f"restricted_to_group='{self.restricted_to_group.all()}', "
+            f"name='{self.name}', "
+            f"is_embedded='{self.is_embedded}'"
+            f")"
+        )
 
     class Meta:
+        """Webhook :: Meta"""
+
         verbose_name = "Webhook"
         verbose_name_plural = "Webhooks"
         default_permissions = ()
