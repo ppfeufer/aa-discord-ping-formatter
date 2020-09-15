@@ -9,6 +9,10 @@
 
 App for formatting pings for Discord in Alliance Auth
 
+## Archived
+
+This app has been discontinued in favor of [AA Fleet Pings](https://github.com/ppfeufer/aa-fleetpings) and this Repository has been archived.
+
 ## Contents
 
 - [Installation](#installation)
